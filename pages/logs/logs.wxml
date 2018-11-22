@@ -1,0 +1,41 @@
+<view class="navbar" style=" z-index:50">
+  <!--循环-->
+  <view wx:for="{{navbar}}" data-idx="{{index}}" wx:key="unique" class="item {{currentTab==index ? 'active' : ''}}" bindtap="navbarTap">
+    <view class="notice" wx:if="{{count[index]>0}}">{{count[index]}}</view>
+    {{item}}
+    <!--<text  bindtap="navbarTap">{{item}}</text>-->
+  </view>
+</view>
+
+<view hidden="{{currentTab !== 0}}" id="one">
+  <view class="li"  wx:for="{{equipPlace}}" wx:for-index="equipForIndex">
+      <picker mode="selector" bindchange = "bindPickerChange" id="abc{{equipForIndex+1}}" value="{{equipIndexArray[equipForIndex]}}" range="{{equipArray[equipForIndex]}}" data-idx = "{{equipForIndex}}">
+        <text >{{equipPlace[equipForIndex].value}}  </text>
+       <text  class='setcontext' > {{equipArray[equipForIndex][equipIndexArray[equipForIndex]]}}</text>
+
+      </picker>
+  </view>
+  
+</view>
+
+<view hidden="{{currentTab !== 1}}" id="one">
+
+</view>
+
+<view hidden="{{currentTab !== 2}}" id="one">
+
+</view>
+
+<!--面板-->
+<view hidden="{{currentTab !== 3}}" id="one">
+  <view class="li" wx:for="{{propertyList}}" wx:for-index="propForIndex">      
+     <text >{{propertyList[propForIndex].name}}   </text>
+     <text >{{propertyList[propForIndex].value}}</text>
+     
+  </view>
+</view>
+
+<!--数据初始加载-->
+<view hidden="{{currentTab !== 4}}" id="one">
+
+</view>
