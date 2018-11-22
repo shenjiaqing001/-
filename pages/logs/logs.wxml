@@ -11,7 +11,7 @@
   <view class="li"  wx:for="{{equipPlace}}" wx:for-index="equipForIndex">
       <picker mode="selector" bindchange = "bindPickerChange" id="abc{{equipForIndex+1}}" value="{{equipIndexArray[equipForIndex]}}" range="{{equipArray[equipForIndex]}}" data-idx = "{{equipForIndex}}">
         <text >{{equipPlace[equipForIndex].value}}  </text>
-       <text  class='setcontext' > {{equipArray[equipForIndex][equipIndexArray[equipForIndex]]}}</text>
+       <text  class='setcontext' > {{equipArray[equipForIndex][equipIndexArray[equipForIndex]].name}}</text>
 
       </picker>
   </view>

@@ -61,11 +61,14 @@
 }
 
 .setcontext {
-  position: fixed;
-  right: 5%;
+  float: right;
   width: 200rpx;
   text-align: right;
   color: #888;
+}
+
+.picker{
+  width:  200rpx;
 }
 
 .icon-gengduo, .right {
