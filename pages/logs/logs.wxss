@@ -62,6 +62,7 @@
 
 .setcontext {
   float: right;
+  margin-top: -60rpx;
   width: 200rpx;
   text-align: right;
   color: #888;
