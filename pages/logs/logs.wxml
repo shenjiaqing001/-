@@ -14,12 +14,18 @@
        <text  class='setcontext' > {{equipArray[equipForIndex][equipIndexArray[equipForIndex]].name}}</text>
 
       </picker>
-  </view>
+  </view>  
   
 </view>
 
-<view hidden="{{currentTab !== 1}}" id="one">
 
+<view hidden="{{currentTab !== 1}}" id="one">
+  <view class="li"  wx:for="{{enchantPlace}}" wx:for-index="enchantForIndex">
+      <text >{{enchanPlace[enchanForIndex].value}}  </text>
+      <picker hidden='{{enchantPlace[enchantForIndex].show}} '  class= "picker" mode="selector" bindchange = "bindPickerChange" id="abc{{enchantForIndex+1}}" value="{{enchanIndexArray[enchantForIndex]}}" range="{{enchanArray[enchantForIndex]}}" range-key="name"  data-idx = "{{enchantForIndex}}">        
+        <text  class='setcontext' > 123</text>
+      </picker>
+  </view>  
 </view>
 
 <view hidden="{{currentTab !== 2}}" id="one">
