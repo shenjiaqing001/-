@@ -6,66 +6,66 @@ Page({
     currentTab: 0, //预设当前项的值
     equipArray: [
       //gongji 攻击  jisu 急速 zhushuxing 主属性  huixin 会心 mingzhong 命中 zhuanjing专精
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }], //1
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//2
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//3
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//4
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//5
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//6
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//7
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//8
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//9
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//10
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//11
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//12
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//13
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//14
-      [{ name: '玄九90', gongji: "90", zhushuxing: "90", jisu: "90", huixin: "90", mingzhong: "90", zhuanjing: "90" },
-        { name: '四大95', gongji: "95", zhushuxing: "95", jisu: "95", huixin: "95", mingzhong: "95", zhuanjing: "95" },
-        { name: '承云令75', gongji: "75", zhushuxing: "75", jisu: "75", huixin: "75", mingzhong: "75", zhuanjing: "75" },
-        { name: '手工80', gongji: "80", zhushuxing: "80", jisu: "80", huixin: "80", mingzhong: "80", zhuanjing: "80" }],//15
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
+      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, mingzhong: 90, zhuanjing: 90 },
+        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, mingzhong: 95, zhuanjing: 95 },
+        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, mingzhong: 75, zhuanjing: 75 },
+        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, mingzhong: 80, zhuanjing: 80 }], //1
     ],
 
     equipIndexArray:[
@@ -144,7 +144,7 @@ Page({
   },
 
   updatePorperty:function(){
-
+    
 
   },
 
