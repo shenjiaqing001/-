@@ -9,7 +9,7 @@
 
 <view hidden="{{currentTab !== 0}}" id="one">
   <view class="li"  wx:for="{{equipPlace}}" wx:for-index="equipForIndex">
-      <picker class= "picker" mode="selector" bindchange = "bindPickerChange" id="abc{{equipForIndex+1}}" value="{{equipIndexArray[equipForIndex]}}" range="{{equipArray[equipForIndex]}}" range-key="name"  data-idx = "{{equipForIndex}}">
+      <picker class= "picker" mode="selector" bindchange = "equipPickerChange" id="abc{{equipForIndex+1}}" value="{{equipIndexArray[equipForIndex]}}" range="{{equipArray[equipForIndex]}}" range-key="name"  data-idx = "{{equipForIndex}}">
         <text >{{equipPlace[equipForIndex].value}}  </text>
        <text  class='setcontext' > {{equipArray[equipForIndex][equipIndexArray[equipForIndex]].name}}</text>
 
@@ -20,11 +20,13 @@
 
 
 <view hidden="{{currentTab !== 1}}" id="one">
-  <view class="li"  wx:for="{{enchantPlace}}" wx:for-index="enchantForIndex">
-      <text >{{enchanPlace[enchanForIndex].value}}  </text>
-      <picker hidden='{{enchantPlace[enchantForIndex].show}} '  class= "picker" mode="selector" bindchange = "bindPickerChange" id="abc{{enchantForIndex+1}}" value="{{enchanIndexArray[enchantForIndex]}}" range="{{enchanArray[enchantForIndex]}}" range-key="name"  data-idx = "{{enchantForIndex}}">        
-        <text  class='setcontext' > 123</text>
+  <view class="li"  wx:for="{{enchantPlace}}" wx:for-index="enchantForIndex" > 
+    <view hidden= "{{enchantPlace[enchantForIndex].show}}" class="picker"> 
+      <picker class= "picker" mode="selector" bindchange = "enchantPickerChange" id="abc{{enchantForIndex+1}}" value="{{enchantIndexArray[enchantForIndex]}}" range="{{enchantArray[enchantForIndex]}}" range-key="name"  data-idx = "{{enchantForIndex}}"> 
+      <text >{{enchantPlace[enchantForIndex].value}}  </text> 
+        <text  class='setcontext' > {{enchantArray[enchantForIndex][enchantIndexArray[enchantForIndex]].name}}</text>
       </picker>
+    </view>      
   </view>  
 </view>
 
