@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+    /*
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -31,8 +32,15 @@ App({
           })
         }
       }
+    })*/
+
+    console.log("abd")
+    wx.cloud.init({
+      env: 'simulate-39ffa2'
     })
   },
+
+
   globalData: {
     userInfo: null
   }

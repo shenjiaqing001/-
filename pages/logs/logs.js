@@ -1,7 +1,7 @@
 var app = getApp();
 Page({
   data: {
-    navbar: ['装备', '附魔', '宝石', "属性"],
+    navbar: ['装备', '附魔/宝石', '星蕴', "属性"],
     winHeight: "",//窗口高度
     currentTab: 0, //预设当前项的值
     equipArray: [
@@ -72,42 +72,6 @@ Page({
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ],
 
-
-    enchantIndex: 0,
-   
-    enchantPlace: [
-      { name: '武器', value: '武器', show: false },
-      { name: '头', value: '头', show: false },
-      { name: '衣服', value: '衣服', show: false },
-      { name: '护腕', value: '护腕', show: false },
-      { name: '裤', value: '裤', show: false },
-      { name: '鞋', value: '鞋', show: false },
-    ],
-
-
-    enchantIndexArray: [
-      0, 0, 0, 0, 0, 0,
-    ],
-    enchantArray: [
-      //gongji 攻击  jisu 急速 zhushuxing 主属性  huixin 会心 zhuanzhu 命中 zhuanjing专精
-      [{ name: '法术攻击10', gongji: 10 },
-        { name: '法术攻击8', gongji: 8 }],
-      [{ name: '专注24', zhuanzhu: 24 },
-      { name: '专注36', zhuanzhu: 36 }],
-      [{ name: '主属性8', zhushuxing: 8 },
-      { name: '主属性12', zhuanzhu: 12 }],
-      [{ name: '专注24', zhuanzhu: 24 },
-      { name: '强度24', qiangdu: 24 },
-      { name: '专精24', zhuanjing: 24 }],
-      [{ name: '主属性8', zhushuxing: 8 },
-      { name: '主属性12', zhuanzhu: 12 }],
-      [{ name: '急速24', jisu: 24 },
-      { name: '急速36', jisu: 36 }],
-    ],
-
-
-
-
     equipIndex: 0,
     equipPlace: [
       { name: '武器', value: '武器' },
@@ -126,6 +90,90 @@ Page({
       { name: '戒指1', value: '戒指1' },
       { name: '戒指2', value: '戒指2' },
     ],
+//附魔-------------------------------------------------------------------------------------------------------------------------
+    enchantIndex: 0,   
+    enchantPlace: [
+      { name: '武器', value: '武器', show: false },
+      { name: '头', value: '头', show: false },
+      { name: '衣服', value: '衣服', show: false },
+      { name: '护腕', value: '护腕', show: false },
+      { name: '裤', value: '裤', show: false },
+      { name: '鞋', value: '鞋', show: false },
+    ],
+   enchantIndexArray: [
+      0, 0, 0, 0, 0, 0,
+    ],
+
+   enchantArray: [
+      //gongji 攻击  jisu 急速 zhushuxing 主属性  huixin 会心 zhuanzhu 命中 zhuanjing专精
+      [{ name: '攻击8', gongji: 8 },
+        { name: '攻击10', gongji: 10 }],
+      [{ name: '专注24', zhuanzhu: 24 },
+      { name: '专注36', zhuanzhu: 36 }],
+      [{ name: '主属性8', zhushuxing: 8 },
+      { name: '主属性12', zhuanzhu: 12 }],
+      [{ name: '专注24', zhuanzhu: 24 },
+      { name: '强度24', qiangdu: 24 },
+      { name: '专精24', zhuanjing: 24 }],
+      [{ name: '主属性8', zhushuxing: 8 },
+      { name: '主属性12', zhuanzhu: 12 }],
+      [{ name: '急速24', jisu: 24 },
+      { name: '急速36', jisu: 36 }],
+    ],
+
+//宝石-------------------------------------------------------------------------------------------------------------------------
+    stoneIndex: 0,
+    stonePlace: [
+      { name: '信物左', value: '信物左', show: false },
+      { name: '信物左', value: '信物左', show: false },
+      { name: '信物中', value: '信物中', show: false },
+      { name: '信物中', value: '信物中', show: false },
+      { name: '信物右', value: '信物右', show: false },
+      { name: '信物右', value: '信物右', show: false },
+      { name: '项链', value: '项链', show: false },
+      { name: '戒指', value: '戒指', show: false },
+      { name: '戒指', value: '戒指', show: false },
+    ],
+    stoneIndexArray: [
+      0, 0, 0, 0, 0, 0,0,0,0,
+    ],
+    stoneArray: [
+      //gongji 攻击  jisu 急速 zhushuxing 主属性  huixin 会心 zhuanzhu 命中 zhuanjing专精
+      [{ name: '会心25', huixin: 25 },
+        { name: '会心31', huixin: 31 },
+        { name: '专注25', zhuanzhu: 25 },
+        { name: '专注31', zhuanzhu: 31 }],
+      [{ name: '会心25', huixin: 25 },
+      { name: '会心31', huixin: 31 },
+      { name: '主属性9', zhushuxing: 9 },
+      { name: '主属性11', zhushuxing: 11 }],
+      [{ name: '会心25', huixin: 25 },
+      { name: '会心31', huixin: 31 },
+      { name: '专注25', zhuanzhu: 25 },
+      { name: '专注31', zhuanzhu: 31 }],
+      [{ name: '会心25', huixin: 25 },
+      { name: '会心31', huixin: 31 },
+      { name: '主属性9', zhushuxing: 9 },
+      { name: '主属性11', zhushuxing: 11 }],
+      [{ name: '会心25', huixin: 25 },
+      { name: '会心31', huixin: 31 },
+      { name: '主属性9', zhushuxing: 9 },
+      { name: '主属性11', zhushuxing: 11 }],
+      [{ name: '会心25', huixin: 25 },
+      { name: '会心31', huixin: 31 },
+      { name: '主属性9', zhushuxing: 9 },
+      { name: '主属性11', zhushuxing: 11 }],
+      [{ name: '急速25', jisu: 25 },
+      { name: '急速31', jisu: 31 }],
+      [{ name: '急速25', jisu: 25 },
+      { name: '急速31', jisu: 31 }],
+      [{ name: '急速25', jisu: 25 },
+      { name: '急速31', jisu: 31 }],
+    ],
+
+
+
+
 
     propertyList:[
       { name: "术", value: 0 },
@@ -161,6 +209,17 @@ Page({
     })
   },
 
+  //宝石
+ stonePickerChange: function (e) {
+    var index = this.data.index
+    const curindex = e.target.dataset.idx
+    this.data.stoneIndexArray[curindex] = e.detail.value
+    this.updatePorperty()
+    this.setData({
+      stoneIndexArray: this.data.stoneIndexArray
+    })
+  },
+
   //响应点击导航栏
   navbarTap: function (e) {
     var that = this;
@@ -170,6 +229,7 @@ Page({
     })
   },
 
+//onload 
   onLoad: function () {
     var that = this;
     this.updatePorperty()
@@ -186,6 +246,20 @@ Page({
         });
       }
     });
+
+    wx.cloud.database().collection('equip').get({
+      success: function (res) {
+        that.setData({
+          //res是json
+          //res.data 是数据
+          //res.errMsg 提示
+          enchantArray: res.data
+        })
+        // res.data 是包含以上定义的两条记录的数组
+        console.log(JSON.stringify(res))
+        console.log(res.data)
+      }
+    })
   },
 
   updatePorperty: function () {
@@ -251,6 +325,37 @@ Page({
         if (this.data.propertyList[index].name == "专精") {
           if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].zhuanjing != null)
             this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].zhuanjing
+        }
+      }
+
+      for (var index2 in this.data.stonePlace) {
+        if (this.data.propertyList[index].name == "术") {
+          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].zhushuxing != null)
+            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].zhushuxing
+        }
+        if (this.data.propertyList[index].name == "攻击") {
+          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].gongji != null)
+            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].gongji
+        }
+        if (this.data.propertyList[index].name == "会心") {
+          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].huixin != null)
+            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].huixin
+        }
+        if (this.data.propertyList[index].name == "专注") {
+          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].zhuanzhu != null)
+            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].zhuanzhu
+        }
+        if (this.data.propertyList[index].name == "急速") {
+          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].jisu != null)
+            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].jisu
+        }
+        if (this.data.propertyList[index].name == "强度") {
+          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].qiangdu != null)
+            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].qiangdu
+        }
+        if (this.data.propertyList[index].name == "专精") {
+          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].zhuanjing != null)
+            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].zhuanjing
         }
       }
     }
