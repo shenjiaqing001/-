@@ -9,10 +9,9 @@
 
 <view hidden="{{currentTab !== 0}}" id="one">
   <view class="li"  wx:for="{{equipPlace}}" wx:for-index="equipForIndex">
-      <picker class= "picker" mode="selector" bindchange = "equipPickerChange" id="abc{{equipForIndex+1}}" value="{{equipIndexArray[equipForIndex]}}" range="{{equipArray[equipForIndex]}}" range-key="name"  data-idx = "{{equipForIndex}}">
+      <picker class= "picker" mode="selector" bindchange = "equipPickerChange" value="{{equipIndexArray[equipForIndex]}}" range="{{equipArray[equipForIndex]}}" range-key="value"  data-idx = "{{equipForIndex}}">
         <text >{{equipPlace[equipForIndex].value}}  </text>
        <text  class='setcontext' > {{equipArray[equipForIndex][equipIndexArray[equipForIndex]].name}}</text>
-
       </picker>
   </view>  
   
@@ -25,7 +24,7 @@
   </view>
   <view class="li"  wx:for="{{enchantPlace}}" wx:for-index="enchantForIndex" > 
     <view hidden= "{{enchantPlace[enchantForIndex].show}}" class="picker"> 
-      <picker class= "picker" mode="selector" bindchange = "enchantPickerChange" id="abc{{enchantForIndex+1}}" value="{{enchantIndexArray[enchantForIndex]}}" range="{{enchantArray[enchantForIndex]}}" range-key="name"  data-idx = "{{enchantForIndex}}"> 
+      <picker class= "picker" mode="selector" bindchange = "enchantPickerChange"  value="{{enchantIndexArray[enchantForIndex]}}" range="{{enchantArray[enchantForIndex]}}" range-key="name"  data-idx = "{{enchantForIndex}}"> 
       <text >{{enchantPlace[enchantForIndex].value}}  </text> 
         <text  class='setcontext' > {{enchantArray[enchantForIndex][enchantIndexArray[enchantForIndex]].name}}</text>
       </picker>
@@ -37,7 +36,7 @@
   </view>
   <view class="li"  wx:for="{{stonePlace}}" wx:for-index="stoneForIndex" > 
     <view hidden= "{{stonePlace[stoneForIndex].show}}" class="picker"> 
-      <picker class= "picker" mode="selector" bindchange = "stonePickerChange" id="abc{{stoneForIndex+1}}" value="{{stoneIndexArray[stoneForIndex]}}" range="{{stoneArray[stoneForIndex]}}" range-key="name"  data-idx = "{{stoneForIndex}}"> 
+      <picker class= "picker" mode="selector" bindchange = "stonePickerChange"  value="{{stoneIndexArray[stoneForIndex]}}" range="{{stoneArray[stoneForIndex]}}" range-key="name"  data-idx = "{{stoneForIndex}}"> 
       <text >{{stonePlace[stoneForIndex].value}}  </text> 
         <text  class='setcontext' > {{stoneArray[stoneForIndex][stoneIndexArray[stoneForIndex]].name}}</text>
       </picker>
@@ -45,8 +44,13 @@
   </view>  
 </view>
 
+<!--星蕴-->
 <view hidden="{{currentTab !== 2}}" id="one">
-
+  <view class="li"  wx:for="{{starArray}}" wx:for-index="starForIndex">
+      <text >{{starArray[starForIndex].name}}  </text>
+      <input type="number" placeholder="请输入数字"  bindblur="starInputChange" data-idx = "{{starForIndex}}">
+      </input>
+  </view>  
 </view>
 
 <!--面板-->

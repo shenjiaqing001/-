@@ -4,69 +4,7 @@ Page({
     navbar: ['装备', '附魔/宝石', '星蕴', "属性"],
     winHeight: "",//窗口高度
     currentTab: 0, //预设当前项的值
-    equipArray: [
-      //gongji 攻击  jisu 急速 zhushuxing 主属性  huixin 会心 zhuanzhu 命中 zhuanjing专精
-      [{ name: '玄九90', gongji: 90, zhushuxing: 80, jisu: 70, huixin: 60, zhuanzhu: 50, zhuanjing: 40 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-      [{ name: '玄九90', gongji: 90, zhushuxing: 90, jisu: 90, huixin: 90, zhuanzhu: 90, zhuanjing: 90 },
-        { name: '四大95', gongji: 95, zhushuxing: 95, jisu: 95, huixin: 95, zhuanzhu: 95, zhuanjing: 95 },
-        { name: '承云令75', gongji: 75, zhushuxing: 75, jisu: 75, huixin: 75, zhuanzhu: 75, zhuanjing: 75 },
-        { name: '手工80', gongji: 80, zhushuxing: 80, jisu: 80, huixin: 80, zhuanzhu: 80, zhuanjing: 80 }], //1
-    ],
+    equipArray: [ ],
 
     equipIndexArray: [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -104,22 +42,7 @@ Page({
       0, 0, 0, 0, 0, 0,
     ],
 
-   enchantArray: [
-      //gongji 攻击  jisu 急速 zhushuxing 主属性  huixin 会心 zhuanzhu 命中 zhuanjing专精
-      [{ name: '攻击8', gongji: 8 },
-        { name: '攻击10', gongji: 10 }],
-      [{ name: '专注24', zhuanzhu: 24 },
-      { name: '专注36', zhuanzhu: 36 }],
-      [{ name: '主属性8', zhushuxing: 8 },
-      { name: '主属性12', zhuanzhu: 12 }],
-      [{ name: '专注24', zhuanzhu: 24 },
-      { name: '强度24', qiangdu: 24 },
-      { name: '专精24', zhuanjing: 24 }],
-      [{ name: '主属性8', zhushuxing: 8 },
-      { name: '主属性12', zhuanzhu: 12 }],
-      [{ name: '急速24', jisu: 24 },
-      { name: '急速36', jisu: 36 }],
-    ],
+   enchantArray: [ ],
 
 //宝石-------------------------------------------------------------------------------------------------------------------------
     stoneIndex: 0,
@@ -171,19 +94,31 @@ Page({
       { name: '急速31', jisu: 31 }],
     ],
 
-
-
-
-
-    propertyList:[
-      { name: "术", value: 0 },
+    starArray:[
+      { name: "主属性", value: 0 },
       { name: "攻击", value: 0 },
       { name: "会心", value: 0 },
       { name: "专注", value: 0 },
       { name: "急速", value: 0 },
       { name: "强度", value: 0 },
       { name: "专精", value: 0 },
-      { name: "等级", value: 0 },
+    ],
+
+
+
+    zhushuxing : -1,
+    gongji : -1,
+    huixin : -1,
+    qiangdu : -1,
+
+    propertyList:[
+      { name: "主属性", value: 0 },
+      { name: "攻击", value: 0 },
+      { name: "会心", value: 0 },
+      { name: "专注", value: 0 },
+      { name: "急速", value: 0 },
+      { name: "强度", value: 0 },
+      { name: "专精", value: 0 },
     ],
   },
 
@@ -220,6 +155,18 @@ Page({
     })
   },
 
+  starInputChange: function (e) {
+    var index = this.data.index
+    const curindex = e.target.dataset.idx
+    this.data.starArray[curindex].value = parseInt(e.detail.value)
+    console.log(this.data.starArray)
+    this.updatePorperty()
+    this.setData({
+      starArray: this.data.starArray
+    })
+  },
+
+
   //响应点击导航栏
   navbarTap: function (e) {
     var that = this;
@@ -232,7 +179,19 @@ Page({
 //onload 
   onLoad: function () {
     var that = this;
-    this.updatePorperty()
+
+    for (var index in this.data.propertyList) {
+      if (this.data.propertyList[index].name == "主属性")
+        this.data.zhushuxing = index
+      if (this.data.propertyList[index].name == "攻击")
+        this.data.gongji = index
+      if (this.data.propertyList[index].name == "会心")
+        this.data.huixin = index
+      if (this.data.propertyList[index].name == "强度")
+        this.data.qiangdu = index
+    }
+
+   
     //  高度自适应
     wx.getSystemInfo({
       success: function (res) {
@@ -247,58 +206,62 @@ Page({
       }
     });
 
-    wx.cloud.database().collection('equip').get({
-      success: function (res) {
-        that.setData({
-          //res是json
-          //res.data 是数据
-          //res.errMsg 提示
-          enchantArray: res.data
+    const db = wx.cloud.database()
+    // 查询当前用户所有的 counters
+    db.collection('enchant').where({
+      _openid: this.data.openid
+    }).get({
+      success: res => {
+        this.setData({
+          //enchantArray: res.data[0],
+          enchantArray : res.data[0].enchants,
+          equipArray : res.data[1].equip,
+          queryResult: JSON.stringify(res.data, null, 2)
         })
-        // res.data 是包含以上定义的两条记录的数组
-        console.log(JSON.stringify(res))
-        console.log(res.data)
-      }
+        console.log('[数据库] [查询记录] 成功: ', res.data[0].enchants) 
+        console.log('[数据库] [查询记录] 成功: ', res.data[1].equip) 
+      },
     })
+
+    //this.updatePorperty()
   },
 
   updatePorperty: function () {
-    console.log("updatePorperty")
     for (var index in this.data.propertyList) {
       this.data.propertyList[index].value = 0
       for (var index2 in this.data.equipPlace) {
-        if (this.data.propertyList[index].name == "术") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhushuxing != null)
+        if (this.data.propertyList[index].name == "主属性") {
+          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhushuxing != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhushuxing != "")
             this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhushuxing
         }
         if (this.data.propertyList[index].name == "攻击") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].gongji != null)
+          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].gongji != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].gongji != "")
             this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].gongji
         }
         if (this.data.propertyList[index].name == "会心") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].huixin != null)
+          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].huixin != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].huixin != "")
             this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].huixin
         }
         if (this.data.propertyList[index].name == "专注") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhuanzhu != null)
+          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhuanzhu != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhuanzhu != "")
             this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhuanzhu
         }
         if (this.data.propertyList[index].name == "急速") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].jisu != null)
+          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].jisu != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].jisu != "")
             this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].jisu
         }
         if (this.data.propertyList[index].name == "强度") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].qiangdu != null)
+          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].qiangdu != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].qiangdu != "")
             this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].qiangdu
         }
         if (this.data.propertyList[index].name == "专精") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhuanjing != null)
+          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhuanjing != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhuanjing != "")
             this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].zhuanjing
         }
       }
 
       for (var index2 in this.data.enchantPlace) {
-        if (this.data.propertyList[index].name == "术") {
+        if (this.data.propertyList[index].name == "主属性") {
           if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].zhushuxing != null)
             this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].zhushuxing
         }
@@ -325,11 +288,11 @@ Page({
         if (this.data.propertyList[index].name == "专精") {
           if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].zhuanjing != null)
             this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].zhuanjing
-        }
+        }        
       }
 
       for (var index2 in this.data.stonePlace) {
-        if (this.data.propertyList[index].name == "术") {
+        if (this.data.propertyList[index].name == "主属性") {
           if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].zhushuxing != null)
             this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].zhushuxing
         }
@@ -357,10 +320,20 @@ Page({
           if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].zhuanjing != null)
             this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].zhuanjing
         }
-      }
+      } 
+
+      for (var index2 in this.data.starArray)
+        if (this.data.propertyList[index].name == this.data.starArray[index2].name){
+          if (this.data.starArray[index2].value != null){
+             if(!isNaN(this.data.starArray[index2].value))
+              this.data.propertyList[index].value += this.data.starArray[index2].value
+          }
+        }      
     }
 
-
+    this.data.propertyList[this.data.gongji].value += this.data.propertyList[this.data.zhushuxing].value * 0.3
+    this.data.propertyList[this.data.huixin].value += this.data.propertyList[this.data.zhushuxing].value * 0.5
+    this.data.propertyList[this.data.qiangdu].value += this.data.propertyList[this.data.zhushuxing].value * 0.7
 
     this.setData({
       propertyList: this.data.propertyList

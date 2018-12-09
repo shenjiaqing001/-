@@ -34,7 +34,6 @@ App({
       }
     })*/
 
-    console.log("abd")
     wx.cloud.init({
       env: 'simulate-39ffa2'
     })

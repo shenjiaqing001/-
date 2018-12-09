@@ -1,4 +1,21 @@
-/**app.wxss**/
+/*顶部导航样式*/
+  .navbar{ 
+ flex: none; 
+ display: flex; 
+ background: #eeeeee; 
+ margin-top: 20rpx;
+ z-index: 50; 
+} 
+.navbar .item{ 
+ position: relative; 
+ flex: auto; 
+ text-align: center;
+ line-height: 60rpx; 
+ font-size: 24rpx;
+ color: #666666;
+ font-family: Microsoft YaHei;
+} 
+
 .container {
   height: 100%;
   display: flex;
@@ -8,3 +25,61 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+.li {
+  font-size: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin: 0;
+  padding: 0 3%;
+  border-bottom: 1px solid #f6f6f6;
+  border-radius: 14rpx;
+  background-color: #fff;
+  color: #353535
+}
+
+.picker{
+  width:  100%;
+}
+
+.icon-gengduo, .right {
+  display: inline-block;
+  color: #bbb;
+}
+
+.textLeft{
+  width: 50%;
+}
+
+.textRIght{
+  float: right;
+  width:20%;
+  text-align: right;
+}
+
+.setcontext {
+  float: right;
+  width: 80%;
+  text-align: right;
+  color: #888888;
+}
+
+.viewTitleWord{
+  font-size: 18pt;
+}
+.viewTitleSemiWord{
+ text-align: right;
+ font-size: 12pt;
+ color: #888888;
+}
+.sliderClass{
+  height: 70rpx;
+}
+
+.checkBox{
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}

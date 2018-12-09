@@ -1,0 +1,55 @@
+.notice {
+    width:28rpx;
+    height:28rpx;
+    color:#fff;
+    text-align:center;
+    background-color:rgb(110,157,180);
+    border-radius:50%;
+    position:absolute;
+    float:left;
+   /* margin-top: 8rpx;*/
+   top:5rpx;
+    font-size: 15rpx;
+    right:30rpx;
+    line-height:30rpx; 
+}
+
+.viewShadow{
+  width: 95%;
+  margin: 0 auto;
+  margin-top:10rpx;
+  margin-bottom:30rpx;
+  border: 0;
+  border-radius: 14rpx;
+  box-shadow: 3rpx 6rpx 10rpx 2rpx rgb(110,157,180);
+}
+
+.viewTitle{
+  font-size: 18pt;
+  display: flex;
+  justify-content: space-between;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin: 0;
+  padding: 0 3%;
+  border-bottom: 2rpx solid rgb(110,157,180);
+}
+
+.navbar .item.active{ 
+ color: rgb(110,157,180);
+ font-size: 24rpx;
+ font-family: Microsoft YaHei;
+} 
+.navbar .item.active:after{ 
+ content: ""; 
+ display: block; 
+ position: absolute; 
+ bottom: 0; 
+ left: 0; 
+ right: 0; 
+ height: 4rpx; 
+ background: rgb(110,157,180);
+ font-size: 24rpx;
+ color: #666666;
+ font-family: Microsoft YaHei;
+}

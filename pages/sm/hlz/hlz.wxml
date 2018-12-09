@@ -1,0 +1,175 @@
+<view class="navbar" style=" z-index:50">
+  <!--循环-->
+  <view wx:for="{{navbar}}" data-idx="{{index}}" wx:key="unique" class="item {{currentTab==index ? 'active' : ''}}" bindtap="navbarTap">
+    <view class="notice" wx:if="{{count[index]>0}}">{{count[index]}}</view>
+    {{item}}
+    <!--<text  bindtap="navbarTap">{{item}}</text>-->
+  </view>
+</view>
+
+<view hidden="{{currentTab !== 0}}">
+  <view class='viewShadow'>
+    <view class="li"  wx:for="{{equipPlace}}" wx:for-index="equipForIndex">
+      <picker class= "picker" mode="selector" bindchange = "equipPickerChange" value="{{equipIndexArray[equipForIndex]}}" range="{{equipArray[equipForIndex]}}" range-key="nameLong"  data-idx = "{{equipForIndex}}">
+        <text >{{equipPlace[equipForIndex].value}}  </text>
+        <text  class='setcontext' > {{equipArray[equipForIndex][equipIndexArray[equipForIndex]].nameLong}}</text>
+      </picker>
+    </view>
+  </view>
+</view>
+
+
+<view hidden="{{currentTab !== 1}}">
+  <view class='viewShadow'>
+    <view class='picker'>
+    <text class='viewTitle'  >附魔</text>
+  </view>
+  <view class="li"  wx:for="{{enchantPlace}}" wx:for-index="enchantForIndex" > 
+    <view hidden= "{{enchantPlace[enchantForIndex].show}}" class="picker"> 
+      <picker class= "picker" mode="selector" bindchange = "enchantPickerChange"  value="{{enchantIndexArray[enchantForIndex]}}" range="{{enchantArray[enchantForIndex]}}" range-key="name"  data-idx = "{{enchantForIndex}}"> 
+      <text >{{enchantPlace[enchantForIndex].value}}  </text> 
+        <text  class='setcontext' > {{enchantArray[enchantForIndex][enchantIndexArray[enchantForIndex]].name}}</text>
+      </picker>
+    </view>      
+  </view>  
+  </view>  
+
+  <view class='viewShadow'>
+   <view class='picker'>
+    <text  class='viewTitle' >宝石</text>
+  </view>
+  <view class="li"  wx:for="{{stonePlace}}" wx:for-index="stoneForIndex" > 
+    <view hidden= "{{stonePlace[stoneForIndex].show}}" class="picker"> 
+      <picker class= "picker" mode="selector" bindchange = "stonePickerChange"  value="{{stoneIndexArray[stoneForIndex]}}" range="{{stoneArray[stoneForIndex]}}" range-key="name"  data-idx = "{{stoneForIndex}}"> 
+      <text>{{stonePlace[stoneForIndex].value}}  </text> 
+        <text  class='setcontext' > {{stoneArray[stoneForIndex][stoneIndexArray[stoneForIndex]].name}}</text>
+      </picker>
+    </view>      
+  </view>  
+  </view>
+ 
+</view>
+
+<!--星蕴-->
+<view hidden="{{currentTab !== 2}}">
+  <view class='viewShadow'>
+    <view class='viewTitle'>星蕴</view>
+    <view class="li"  wx:for="{{starArray}}" wx:for-index="starForIndex">
+      <text>{{starArray[starForIndex].name}}  </text>
+      <input style='text-align:right' type="number" placeholder="请输入数字"  bindblur="starInputChange" data-idx = "{{starForIndex}}">
+      </input>
+  </view>
+  </view>
+
+  <view class='viewShadow'>
+    <view class='viewTitle'>
+      <text class='viewTitleWord'>虎贲</text>
+      <text class='viewTitleSemiWord'>{{huben}}%命中</text>
+    </view>
+    <slider class='sliderClass' min='0' max='5' step='1' show-value='true' activeColor='rgb(110,157,180)' block-color='rgb(110,157,180)' block-size='15' bindchanging='hubenSlider' bindchange='hubenSlider'>
+    </slider>
+  </view>  
+
+  <view class='viewShadow'>
+    <view class='viewTitle'>
+      <text class='viewTitleWord'>亢行</text>
+      <text class='viewTitleSemiWord'>{{kanglong}}%会心</text>
+    </view>
+    <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(110,157,180)' block-color='rgb(110,157,180)' block-size='15' bindchanging='kanglongSlider' bindchange='kanglongSlider'>
+    </slider>
+  </view>
+
+  <view class='viewShadow'>
+    <view class='viewTitle'>
+      <text class='viewTitleWord'>天枪</text>
+      <text class='viewTitleSemiWord'>{{tianqiang}}%会心效果</text>
+    </view>
+    <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(110,157,180)' block-color='rgb(110,157,180)' block-size='15' bindchanging='tianqiangSlider' bindchange='tianqiangSlider'>
+    </slider>
+  </view>
+</view>
+
+<!--残卷食品-->
+<view hidden="{{currentTab !== 3}}">
+  <!--挚友-->
+  <view class='viewShadow'>
+    <view class='viewTitle'>挚友</view>
+    <view>
+      <checkbox-group bindchange="mutiCheckBox">
+        <view class='checkBox' wx:for="{{zhiyouArray}}">
+          <checkbox value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
+        </view>
+      </checkbox-group>
+    </view>    
+  </view>
+
+  <view class='viewShadow'>
+    <view class='viewTitle'>血露薇</view>
+    <view>
+      <radio-group bindchange="singleCheckBox">
+        <view class='checkBox' wx:for="{{xlwArray}}"  wx:key="xlwArray">
+          <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
+        </view>
+      </radio-group>
+    </view>    
+  </view>
+
+  <view class='viewShadow'>
+      <view class='picker'>
+        <text class='viewTitle'  >食品</text>
+      </view>
+      <view class="li"  wx:for="{{foodPlace}}" wx:for-index="foodForIndex" > 
+        <view  class="picker"> 
+          <picker class= "picker" mode="selector" bindchange = "foodPickerChange"  value="{{foodIndexArray[foodForIndex]}}" range="{{foodArray[foodForIndex]}}" range-key="name"  data-idx = "{{foodForIndex}}"> 
+            <text >{{foodPlace[foodForIndex].value}}  </text> 
+            <text  class='setcontext' > {{foodArray[foodForIndex][foodIndexArray[foodForIndex]].name}}</text>
+          </picker>
+        </view>   
+        </view>   
+    </view>
+
+</view>
+
+  <!--面板-->
+<view hidden="{{currentTab !== 4}}">
+  <view class='viewShadow'>
+     <view class='picker'>
+       <text  class='viewTitle' >面板</text>
+     </view>
+     <view class="li" wx:for="{{propertyList}}" wx:for-index="propForIndex">      
+       <text >{{propertyList[propForIndex].name}}</text>
+       <text class='textS'>{{propertyList[propForIndex].value}}</text>
+       <text class='textS'>{{propertyList[propForIndex].percent}}</text>   
+     </view>
+     <view class="li">
+       <view>最终攻击</view>
+       <view style='text-align:right'>{{zuizhong}}</view>
+     </view>
+   </view>
+
+   <view class='viewShadow'>
+     <view class='viewTitle'>
+       <text class='viewTitleWord'>需求命中</text>
+       <text class='viewTitleSemiWord'>{{bossMingzhong}}%</text>
+     </view>
+     <slider min='100' max='108' step='4' activeColor='rgb(110,157,180)' block-color='rgb(110,157,180)' show-value='true' block-color='#bbb' block-size='15' bindchange='bossSlider' bindchanging='bossSlider'>
+     </slider>
+     <view style='width:100%'>
+       <text>伤害期望:</text>
+       <text style='text-align:right;color:#888888'>{{dpsWithoutZJ}}</text>
+     </view>    
+   </view>
+
+  <view class='viewShadow'>
+    <view class='viewTitle'>
+      <text class='viewTitleWord'>专精技能伤害占比</text>
+      <text class='viewTitleSemiWord'>{{zjPercent}}%</text>
+    </view>
+    <slider min='0' max='100' step='1' activeColor='rgb(110,157,180)' block-color='rgb(110,157,180)' show-value='true' block-color='#bbb' block-size='15' bindchange='zhuanjingSlider' bindchanging='zhuanjingSlider'>
+    </slider>
+    <view style='width:100%'>
+      <text >专精加权伤害期望:</text>
+      <text style='text-align:right;color:#888888'>{{dpsWithZJ}}</text>
+    </view>    
+  </view>
+</view>

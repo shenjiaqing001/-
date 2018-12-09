@@ -1,0 +1,127 @@
+/* pages/home.wxss */
+
+.contentAll{
+  text-align: center;  
+}
+
+.contentView1{
+  width: 80%;
+  border: 8rpx solid rgb(192, 109, 99);
+  border-radius: 40rpx;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+.contentView2{
+  width: 80%;
+  border: 8rpx solid rgb(137,162,123);
+  border-radius: 40rpx;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+.contentView3{
+  width: 80%;
+  border: 8rpx solid rgb(133,163,213);
+  border-radius: 40rpx;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+.contentView4{
+  width: 80%;
+  border: 8rpx solid rgb(228,194,131);
+  border-radius: 40rpx;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+.contentView5{
+  width: 80%;
+  border: 8rpx solid rgb(110,157,180);
+  border-radius: 40rpx;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+.contentView6{
+  width: 80%;
+  border: 8rpx solid rgb(144,136,179);
+  border-radius: 40rpx;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+
+.LineColor1{
+  border-bottom: 4rpx solid rgb(192, 109, 99);
+  height: 80rpx;
+}
+.LineColor2{
+  border-bottom: 4rpx solid rgb(137,162,123);
+  height: 80rpx;
+}
+.LineColor3{
+  border-bottom: 4rpx solid rgb(133,163,213);
+  height: 80rpx;
+}
+.LineColor4{
+  border-bottom: 4rpx solid rgb(228,194,131);
+  height: 80rpx;
+}
+.LineColor5{
+  border-bottom: 4rpx solid rgb(110,157,180);
+  height: 80rpx;
+}
+.LineColor6{
+  border-bottom: 4rpx solid rgb(144,136,179);
+  height: 80rpx;
+}
+
+.button {
+  width: 45%;
+  display:inline-block;
+  border-left: 20rpx;
+  border-right: 20rpx;
+  border: 0rpx;
+  font-size: 40rpx;
+  padding-left:0;
+  padding-right:0px;
+}
+
+.button::after{
+  border: none;
+}
+
+button[disabled]:not([type]) {
+  color:rgba(0, 0, 0, 0.3);
+  background-color:rgb(255, 255, 255);
+}
+
+
+.color1 {
+  background-color: white; 
+	color: rgb(192, 109, 99); 
+}
+.color2 {
+  background-color: white; 
+	color: rgb(137,162,123); 
+}
+.color3 {
+  background-color: white; 
+	color: rgb(133,163,213); 
+}
+.color4 {
+  background-color: white; 
+	color: rgb(228,194,131); 
+}
+.color5 {
+  background-color: white; 
+	color: rgb(110,157,180); 
+}
+.color6 {
+	background-color: white; 
+	color: rgb(144,136,179);
+}
+
+.bottomText{
+  font-size: 14rpx;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 0rpx;
+}
