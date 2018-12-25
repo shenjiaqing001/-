@@ -78,7 +78,7 @@
     <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(133,163,213)' block-color='rgb(133,163,213)' block-size='15' bindchanging='kanglongSlider' bindchange='kanglongSlider'>
     </slider>
   </view>
-
+<!--
   <view class='viewShadow'>
     <view class='viewTitle'>
       <text class='viewTitleWord'>天枪</text>
@@ -87,6 +87,7 @@
     <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(133,163,213)' block-color='rgb(133,163,213)' block-size='15' bindchanging='tianqiangSlider' bindchange='tianqiangSlider'>
     </slider>
   </view>
+  -->
 </view>
 
 <!--残卷食品-->
@@ -146,7 +147,7 @@
        <view style='text-align:right'>{{zuizhong}}</view>
      </view>
    </view>
-
+ <!-- 
    <view class='viewShadow'>
      <view class='viewTitle'>
        <text class='viewTitleWord'>需求命中</text>
@@ -172,4 +173,15 @@
       <text style='text-align:right;color:#888888'>{{dpsWithZJ}}</text>
     </view>    
   </view>
+
+    <!-- 生成分享图 这里的操作是把canvas绘制的图预览出来  -->
+<button class='share' type='primary' bindtap='share'>生成分享图</button>
+<view class="modalDlg" hidden="{{showCanvas}}">    
+    <canvas  canvas-id="shareImg" style='width:290px;height:403px;margin-top:5%'></canvas>
+    <view class='modal-btn-wrapper'>
+      <view class='cancel-btn' style='color:rgba(7,17,27,0.6)' bindtap='closeCanvas'>取消</view>
+      <view class='confirm-btn' style='color:#1AAD19' bindtap='save'>保存到相册</view>
+    </view>
+</view>
+<view class="mask" catchtouchmove="preventTouchMove" hidden="{{showCanvas}}"></view>
 </view>

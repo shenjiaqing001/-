@@ -4,7 +4,7 @@ Page({
     navbar: ['装备', '附魔/宝石', '星蕴/特技', '附加属性', "属性"],
     winHeight: "",//窗口高度
     currentTab: 0, //预设当前项的值
-    equipArray: [ ],
+    equipArray: [],
 
     equipIndexArray: [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -29,22 +29,23 @@ Page({
       { name: '戒指2', value: '戒指2' },
     ],
     //附魔-------------------------------------------------------------------------------------------------------------------------
-    enchantIndex: 0,   
+    enchantIndex: 0,
     enchantPlace: [
       { name: '武器', value: '武器', show: false },
       { name: '头', value: '头', show: false },
       { name: '衣服', value: '衣服', show: false },
       { name: '护腕', value: '护腕', show: false },
+      { name: '腰带', value: '腰带', show: false },
       { name: '裤', value: '裤', show: false },
       { name: '鞋', value: '鞋', show: false },
     ],
-   enchantIndexArray: [
-      0, 0, 0, 0, 0, 0,
+    enchantIndexArray: [
+      0, 0, 0, 0, 0, 0, 0,
     ],
 
-   enchantArray: [ ],
+    enchantArray: [],
 
-   //食品-----------------------------------------------------------------------------------------------------------------------
+    //食品-----------------------------------------------------------------------------------------------------------------------
     foodIndex: 0,
     foodPlace: [
       { name: '攻击食品', value: '攻击食品', show: false },
@@ -70,7 +71,7 @@ Page({
       { name: '戒指', value: '戒指', show: false },
     ],
     stoneIndexArray: [
-      0, 0, 0, 0, 0, 0,0,0,0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0,
     ],
     stoneArray: [
     ],
@@ -85,12 +86,12 @@ Page({
       { name: "急速", value: 0 },
     ],
 
-    zhiyouArray:[
+    zhiyouArray: [
       { name: "1%会心", value: 0, checked: false },
       { name: "1%专精", value: 1, checked: false },
       { name: "1%强度", value: 2, checked: false }
     ],
-    zhiyouList :[],
+    zhiyouList: [],
 
     xlwArray: [
       { name: "1%会心", value: 0, checked: false },
@@ -98,15 +99,15 @@ Page({
       { name: "1%强度", value: 2, checked: false },
       { name: "1%急速", value: 3, checked: false }
     ],
-    xlwBuff:0,
+    xlwBuff: 0,
 
-    属性 : -1,
-    攻击 : -1,
-    会心 : -1,
-    强度 : -1,
-    专注:-1,
-    专精:-1,
-    急速:-1,
+    属性: -1,
+    攻击: -1,
+    会心: -1,
+    强度: -1,
+    专注: -1,
+    专精: -1,
+    急速: -1,
 
     propertyList: [
       { name: "属性", value: 0, percent: 0 },
@@ -118,21 +119,19 @@ Page({
       { name: "急速", value: 0, percent: 0 },
     ],
 
-    huben:0,
-    kanglong:0,
-    tianqiang:0,
-    bossMingzhong:100,
-    zjPercent:0,
+    huben: 0,
+    kanglong: 0,
+    tianqiang: 0,
 
-    dpsWithoutZJ:0,
-    dpsWithZJ:0,
-    zuizhong:0,
+    zuizhong: 0,
+
+    showCanvas: true
   },
 
   //挚友
   mutiCheckBox: function (e) {
     this.setData({
-      zhiyouList : e.detail.value
+      zhiyouList: e.detail.value
     })
     this.updatePorperty()
   },
@@ -140,7 +139,7 @@ Page({
   //血露薇
   singleCheckBox: function (e) {
     this.setData({
-        xlwBuff :e.detail.value      
+      xlwBuff: e.detail.value
     })
     this.updatePorperty()
   },
@@ -157,7 +156,7 @@ Page({
     this.updatePorperty()
   },
 
-//附魔
+  //附魔
   enchantPickerChange: function (e) {
     var index = this.data.index
     const curindex = e.target.dataset.idx
@@ -169,14 +168,14 @@ Page({
   },
 
   //宝石
- stonePickerChange: function (e) {
+  stonePickerChange: function (e) {
     var index = this.data.index
     const curindex = e.target.dataset.idx
     this.data.stoneIndexArray[curindex] = e.detail.value
     this.setData({
       stoneIndexArray: this.data.stoneIndexArray
     })
-   this.updatePorperty()
+    this.updatePorperty()
   },
 
   //食品
@@ -254,8 +253,25 @@ Page({
     })
     this.updatePorperty()
   },
-
-//onload 
+  jzySwitch: function (e) {
+    this.setData({
+      jzy: e.detail.value
+    })
+    this.updatePorperty()
+  },
+  yanguangSwitch: function (e) {
+    this.setData({
+      yanguang: e.detail.value
+    })
+    this.updatePorperty()
+  },
+  chongmingSwitch: function (e) {
+    this.setData({
+      chongming: e.detail.value
+    })
+    this.updatePorperty()
+  },
+  //onload 
   onLoad: function () {
     var that = this;
 
@@ -275,7 +291,7 @@ Page({
       if (this.data.propertyList[index].name == "急速")
         this.data.急速 = index
     }
-   
+
     //  高度自适应
     wx.getSystemInfo({
       success: function (res) {
@@ -297,9 +313,8 @@ Page({
       success: res => {
         this.setData({
           //enchantArray: res.data[0],
-          enchantArray : res.data[0].enchants,
+          enchantArray: res.data[0].enchant_DPS,
         })
-        console.log('[数据库enchant]  成功: ', res.data[0].enchants) 
       },
     })
 
@@ -308,9 +323,8 @@ Page({
     }).get({
       success: res => {
         this.setData({
-          stoneArray: res.data[0].stone,
+          stoneArray: res.data[0].stone_DPS,
         })
-        console.log('[数据库stone] 成功: ', res.data[0].stone)
       },
     })
 
@@ -321,7 +335,6 @@ Page({
         this.setData({
           foodArray: res.data[0].food,
         })
-        console.log('[数据库food]  成功: ', res.data[0].food)
       },
     })
 
@@ -331,15 +344,14 @@ Page({
       success: res => {
         this.setData({
           //enchantArray: res.data[0],
-          equipArray: res.data[0].equip,
+          equipArray: res.data[0].equipMFDPS,
         })
-        console.log('[数据库] [查询记录] 成功: ', res.data[0].equip)
       },
     })
   },
 
-  getDecimal:function(num){
-    return Math.round(num*100)/100
+  getDecimal: function (num) {
+    return Math.round(num * 100) / 100
   },
 
   updatePorperty: function () {
@@ -404,7 +416,7 @@ Page({
         if (this.data.propertyList[index].name == "专精") {
           if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].专精 != null)
             this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].专精
-        }        
+        }
       }
 
       for (var index2 in this.data.stonePlace) {
@@ -436,7 +448,7 @@ Page({
           if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].专精 != null)
             this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].专精
         }
-      } 
+      }
 
       for (var index2 in this.data.foodPlace) {
         if (this.data.propertyList[index].name == "属性") {
@@ -467,17 +479,17 @@ Page({
           if (this.data.foodArray[index2][this.data.foodIndexArray[index2]].专精 != null)
             this.data.propertyList[index].value += this.data.foodArray[index2][this.data.foodIndexArray[index2]].专精
         }
-      } 
-      
+      }
+
       for (var index2 in this.data.starArray)
-        if (this.data.propertyList[index].name == this.data.starArray[index2].name){
-          if (this.data.starArray[index2].value != null){
-             if(!isNaN(this.data.starArray[index2].value))
+        if (this.data.propertyList[index].name == this.data.starArray[index2].name) {
+          if (this.data.starArray[index2].value != null) {
+            if (!isNaN(this.data.starArray[index2].value))
               this.data.propertyList[index].value += this.data.starArray[index2].value
           }
-        }      
+        }
     }
-    
+
     this.data.propertyList[this.data.攻击].value += this.data.propertyList[this.data.属性].value * 0.3
     this.data.propertyList[this.data.会心].value += this.data.propertyList[this.data.属性].value * 0.5
     this.data.propertyList[this.data.强度].value += this.data.propertyList[this.data.属性].value * 0.7
@@ -494,17 +506,17 @@ Page({
     this.data.propertyList[this.data.属性].percent = this.data.propertyList[this.data.属性].value
     this.data.propertyList[this.data.攻击].percent = this.data.propertyList[this.data.攻击].value
     this.data.propertyList[this.data.专精].percent = this.data.propertyList[this.data.专精].value
-    this.data.propertyList[this.data.会心].percent =this.data.propertyList[this.data.会心].value * 0.075 + this.data.kanglong
-    this.data.propertyList[this.data.专注].percent = this.data.propertyList[this.data.专注].value * 0.06 + 80                                                                                                      +this.data.huben
+    this.data.propertyList[this.data.会心].percent = this.data.propertyList[this.data.会心].value * 0.075 + this.data.kanglong
+    this.data.propertyList[this.data.专注].percent = this.data.propertyList[this.data.专注].value * 0.06 + 80 + this.data.huben
     this.data.propertyList[this.data.强度].percent = this.data.propertyList[this.data.强度].value
     this.data.propertyList[this.data.急速].percent = this.data.propertyList[this.data.急速].value * 0.085
 
     //血露薇
-    if (this.data.xlwBuff == 0) this.data.propertyList[this.data.会心].percent+=1
+    if (this.data.xlwBuff == 0) this.data.propertyList[this.data.会心].percent += 1
     else if (this.data.xlwBuff == 1) this.data.propertyList[this.data.专注].percent += 1
     else if (this.data.xlwBuff == 2) this.data.propertyList[this.data.强度].percent += 10
     else if (this.data.xlwBuff == 3) this.data.propertyList[this.data.急速].percent += 1
-    
+
     //挚友
     if (this.data.zhiyouList.indexOf("0") != -1) {
       this.data.propertyList[this.data.会心].percent += 1
@@ -521,26 +533,164 @@ Page({
       this.data.propertyList[index].percent = this.getDecimal(this.data.propertyList[index].percent)
     }
 
-    this.data.zuizhong = this.getDecimal(this.data.propertyList[this.data.攻击].value * (1 + this.data.propertyList[this.data.强度].percent/1000))
-    var hitRate = this.data.propertyList[this.data.专注].percent
-    var criRate = this.data.propertyList[this.data.会心].percent 
-    var zjRate = this.data.propertyList[this.data.专精].percent 
-    var criEffectRate = 0.6+this.data.tianqiang/100;
-    var bossMiss = this.data.bossMingzhong
-    var missRate = this.data.bossMingzhong - hitRate
-    if (missRate < 0)
-      missRate = 0
-    this.data.dpsWithoutZJ = this.getDecimal(this.data.zuizhong * (missRate / 100 * 0.3 + (100 - missRate) / 100 * (criRate / 100 * criEffectRate + 1)))
-    this.data.dpsWithZJ = this.getDecimal(this.data.dpsWithoutZJ * (1 + this.data.zjPercent / 100 * zjRate / 1000))
-
+    this.data.zuizhong = this.getDecimal(this.data.propertyList[this.data.攻击].value * (1 + this.data.propertyList[this.data.强度].percent / 1000))
     this.setData({
       propertyList: this.data.propertyList,
-      zuizhong:this.data.zuizhong,
-      dpsWithoutZJ: this.data.dpsWithoutZJ,
-      dpsWithZJ: this.data.dpsWithZJ,
+      zuizhong: this.data.zuizhong,
     })
   },
 
+  share: function () {
+    this.setData({
+      showCanvas: false
+    })
+    let promise1 = new Promise(function (resolve, reject) {
 
-  footerTap: app.footerTap 
+      /* 获得要在画布上绘制的图片 */
+      wx.getImageInfo({
+        src: '../../../image/mf_bg.jpg',
+        success: function (res) {
+          resolve(res);
+        }
+      })
+    });
+    let promise2 = new Promise(function (resolve, reject) {
+      wx.getImageInfo({
+        src: '../../../image/code.jpg',
+        success: function (res) {
+          resolve(res);
+        }
+      })
+    });
+
+    /* 图片获取成功才执行后续代码 */
+    Promise.all(
+      [promise1, promise2]
+    ).then(res => {
+      console.log(res)
+      /* 创建 canvas 画布 */
+      const ctx = wx.createCanvasContext('shareImg')
+      ctx.setFillStyle('white')
+      ctx.fillRect(0, 0, 290, 403)
+
+      ctx.setGlobalAlpha(0.2)
+      /* 绘制图像到画布  图片的位置你自己计算好就行 参数的含义看文档 */
+      /* ps: 网络图片的话 就不用加../../路径了 反正我这里路径得加 */
+      ctx.drawImage('../../../' + res[0].path, 0, 0, 290, 403)
+
+      ctx.setGlobalAlpha(1)
+      /* 绘制文字 位置自己计算 参数自己看文档 */
+      ctx.setTextAlign('left')                        //  位置
+      ctx.setFillStyle('black')                       //  颜色
+      ctx.setFontSize(18)                               //  字号
+      ctx.fillText('古剑奇谭网络版配装器', 50, 20)         //  内容  不会自己换行 需手动换行
+
+      //装备
+      ctx.setFontSize(16)
+      for (var i = 0; i < this.data.equipArray.length; i++) {
+        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameShort, 5, 25 * i + 40)
+      }
+      ctx.setFontSize(8)
+      ctx.setFillStyle('#666666')
+      for (var i = 0; i < this.data.equipArray.length; i++) {
+        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameLong, 5, 25 * i + 50)
+      }
+      //附魔宝石
+      ctx.setFontSize(12)
+      ctx.fillText(this.data.stoneArray[0][this.data.stoneIndexArray[0]].nameShort, 125, 25 * 1 + 40)
+      ctx.fillText(this.data.stoneArray[1][this.data.stoneIndexArray[1]].nameShort, 180, 25 * 1 + 40)
+      ctx.fillText(this.data.stoneArray[2][this.data.stoneIndexArray[2]].nameShort, 125, 25 * 2 + 40)
+      ctx.fillText(this.data.stoneArray[3][this.data.stoneIndexArray[3]].nameShort, 180, 25 * 2 + 40)
+      ctx.fillText(this.data.stoneArray[4][this.data.stoneIndexArray[4]].nameShort, 125, 25 * 3 + 40)
+      ctx.fillText(this.data.stoneArray[5][this.data.stoneIndexArray[5]].nameShort, 180, 25 * 3 + 40)
+      ctx.fillText(this.data.stoneArray[6][this.data.stoneIndexArray[6]].nameShort, 110, 25 * 10 + 40)
+      ctx.fillText(this.data.stoneArray[7][this.data.stoneIndexArray[7]].nameShort, 110, 25 * 13 + 40)
+      ctx.fillText(this.data.stoneArray[8][this.data.stoneIndexArray[8]].nameShort, 110, 25 * 14 + 40)
+
+      ctx.fillText(this.data.enchantArray[0][this.data.enchantIndexArray[0]].name, 110, 25 * 0 + 40)
+      ctx.fillText(this.data.enchantArray[1][this.data.enchantIndexArray[1]].name, 110, 25 * 4 + 40)
+      ctx.fillText(this.data.enchantArray[2][this.data.enchantIndexArray[2]].name, 110, 25 * 5 + 40)
+      ctx.fillText(this.data.enchantArray[3][this.data.enchantIndexArray[3]].name, 110, 25 * 6 + 40)
+      ctx.fillText(this.data.enchantArray[4][this.data.enchantIndexArray[4]].name, 110, 25 * 7 + 40)
+      ctx.fillText(this.data.enchantArray[5][this.data.enchantIndexArray[5]].name, 110, 25 * 8 + 40)
+      ctx.fillText(this.data.enchantArray[6][this.data.enchantIndexArray[6]].name, 110, 25 * 9 + 40)
+
+      //星蕴
+      ctx.setFontSize(16)
+      ctx.setFillStyle('black')
+      ctx.fillText('星蕴', 160, 140)
+      ctx.setFontSize(12)
+      for (var i = 0; i < this.data.starArray.length; i++) {
+        ctx.fillText(this.data.starArray[i].name, 160, 15 * i + 160)
+      }
+      ctx.setFillStyle('#666666')
+      for (var i = 0; i < this.data.starArray.length; i++) {
+        ctx.fillText(this.data.starArray[i].value, 190, 15 * i + 160)
+      }
+
+      //食品
+      ctx.setFontSize(16)
+      ctx.setFillStyle('black')
+      ctx.fillText('增益', 230, 140)
+      ctx.setFontSize(12)
+      var strList = new Array();
+      for (var i = 0; i < this.data.foodArray.length; i++) {
+        if (this.data.foodIndexArray[i] != 0)
+          strList.push(this.data.foodArray[i][this.data.foodIndexArray[i]].nameShort);
+      }
+      if (this.data.huben != 0)
+        strList.push("虎贲" + this.data.huben)
+      if (this.data.kanglong != 0)
+        strList.push("亢行" + this.data.kanglong)
+
+      for (var i = 0; i < strList.length; i++) {
+        ctx.fillText(strList[i], 230, 15 * i + 160)
+      }
+
+      ctx.setFontSize(16)
+      ctx.setFillStyle('black')
+      ctx.fillText('面板', 180, 280)
+      ctx.setFontSize(12)
+      for (var i = 0; i < this.data.propertyList.length; i++) {
+        ctx.setFillStyle('black')
+        ctx.fillText(this.data.propertyList[i].name, 180, 15 * i + 300)
+        ctx.setFillStyle('#666666')
+        ctx.fillText(this.data.propertyList[i].percent, 210, 15 * i + 300)
+      }
+
+      ctx.drawImage('../../../' + res[1].path, 231, 0, 59, 59)
+
+      /* 绘制 */
+      ctx.stroke()
+      ctx.draw()
+    })
+  },
+  save: function () {
+    var that = this
+    wx.canvasToTempFilePath({
+      canvasId: 'shareImg',
+      success(res) {
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+        })
+        wx.showToast({
+          title: '保存成功',
+          icon: 'succes',
+          duration: 1000,
+          mask: true
+        })
+        that.setData({
+          showCanvas: true
+        })
+      }
+    }, this)
+  },
+
+  closeCanvas: function () {
+    this.setData({
+      showCanvas: true
+    })
+  },
+
+  footerTap: app.footerTap
 })

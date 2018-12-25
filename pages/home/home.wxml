@@ -32,7 +32,7 @@
         <image src='../../image/mf_title.png' style='width:50%;height:100%'></image>
     </view>
     <button class="button:color4" bindtap = "NavigatorToSSLZ">三十六章</button>
-    <button disabled='true' class="button:color4" bindtap = "NavigatorToWarrior">洞渊书</button>
+    <button class="button:color4" bindtap = "NavigatorToDYS">洞渊书</button>
   </view>
 
   <view class="contentView5">
@@ -40,7 +40,7 @@
         <image src='../../image/sm_title.png' style='width:50%;height:100%'></image>
     </view>
     <button class="button:color5"   bindtap = "NavigatorToHLZ">唤灵咒</button>
-    <button disabled='true' class="button:color5"   bindtap = "NavigatorToWarrior">娲圣祝由咒</button>
+    <button class="button:color5"   bindtap = "NavigatorToWSZYZ">娲圣祝由咒</button>
    </view>
 
   <view class="contentView6">
@@ -48,9 +48,11 @@
         <image src='../../image/zy_title.png' style='width:50%;height:100%'></image>
     </view>
     <button class="button:color6"   bindtap = "NavigatorToQMGZ">窃冥蛊咒</button>
-    <button disabled='true' class="button:color6"   bindtap = "NavigatorToWarrior">圣佑血祭</button>
+    <button class="button:color6"   bindtap = "NavigatorToSYXJ">圣佑血祭</button>
   </view>
 
+
+  
  
 </view>
 

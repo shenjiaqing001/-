@@ -5,7 +5,7 @@ Page({
     winHeight: "",//窗口高度
     currentTab: 0, //预设当前项的值
     equipArray: [ ],
-
+    showCanvas: true,
     equipIndexArray: [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ],
@@ -29,20 +29,22 @@ Page({
       { name: '戒指2', value: '戒指2' },
     ],
     //附魔-------------------------------------------------------------------------------------------------------------------------
-    enchantIndex: 0,   
+    enchantIndex: 0,
     enchantPlace: [
       { name: '武器', value: '武器', show: false },
       { name: '头', value: '头', show: false },
       { name: '衣服', value: '衣服', show: false },
       { name: '护腕', value: '护腕', show: false },
+      { name: '腰带', value: '腰带', show: false },
       { name: '裤', value: '裤', show: false },
       { name: '鞋', value: '鞋', show: false },
     ],
-   enchantIndexArray: [
-      0, 0, 0, 0, 0, 0,
+    enchantIndexArray: [
+      0, 0, 0, 0, 0, 0, 0,
     ],
 
-   enchantArray: [ ],
+    enchantArray: [],
+
 
    //食品-----------------------------------------------------------------------------------------------------------------------
     foodIndex: 0,
@@ -139,12 +141,10 @@ Page({
 
   //血露薇
   singleCheckBox: function (e) {
-    console.log(this.data.xlwBuff)
     this.setData({
         xlwBuff :e.detail.value      
     })
     this.updatePorperty()
-    console.log(this.data.xlwBuff)
   },
 
 
@@ -299,9 +299,8 @@ Page({
       success: res => {
         this.setData({
           //enchantArray: res.data[0],
-          enchantArray : res.data[0].enchants,
+          enchantArray : res.data[0].enchant_DPS,
         })
-        console.log('[数据库enchant]  成功: ', res.data[0].enchants) 
       },
     })
 
@@ -310,9 +309,8 @@ Page({
     }).get({
       success: res => {
         this.setData({
-          stoneArray: res.data[0].stone,
+          stoneArray: res.data[0].stone_DPS,
         })
-        console.log('[数据库stone] 成功: ', res.data[0].stone)
       },
     })
 
@@ -323,7 +321,6 @@ Page({
         this.setData({
           foodArray: res.data[0].food,
         })
-        console.log('[数据库food]  成功: ', res.data[0].food)
       },
     })
 
@@ -332,10 +329,8 @@ Page({
     }).get({
       success: res => {
         this.setData({
-          //enchantArray: res.data[0],
-          equipArray: res.data[0].equip,
+          equipArray: res.data[0].equipZFDPS,
         })
-        console.log('[数据库] [查询记录] 成功: ', res.data[0].equip)
       },
     })
   },
@@ -508,7 +503,6 @@ Page({
     else if (this.data.xlwBuff == 3) this.data.propertyList[this.data.急速].percent += 1
     
     //挚友
-    console.log(this.data.zhiyouList)
     if (this.data.zhiyouList.indexOf("0") != -1) {
       this.data.propertyList[this.data.会心].percent += 1
     }
@@ -544,6 +538,156 @@ Page({
     })
   },
 
+  share: function () {
+    this.setData({
+      showCanvas: false
+    })
+    let promise1 = new Promise(function (resolve, reject) {
+
+      /* 获得要在画布上绘制的图片 */
+      wx.getImageInfo({
+        src: '../../../image/zf_bg.jpg',
+        success: function (res) {
+          resolve(res);
+        }
+      })
+    });
+    let promise2 = new Promise(function (resolve, reject) {
+      wx.getImageInfo({
+        src: '../../../image/code.jpg',
+        success: function (res) {
+          resolve(res);
+        }
+      })
+    });
+
+    /* 图片获取成功才执行后续代码 */
+    Promise.all(
+      [promise1, promise2]
+    ).then(res => {
+      console.log(res)
+      /* 创建 canvas 画布 */
+      const ctx = wx.createCanvasContext('shareImg')
+      ctx.setFillStyle('white')
+      ctx.fillRect(0, 0, 290, 403)
+
+      ctx.setGlobalAlpha(0.2)
+      /* 绘制图像到画布  图片的位置你自己计算好就行 参数的含义看文档 */
+      /* ps: 网络图片的话 就不用加../../路径了 反正我这里路径得加 */
+      ctx.drawImage('../../../' + res[0].path, 0, 0, 290, 403)
+      // ctx.drawImage('../../../' + res[1].path, 0, 0, 545, 771)
+      ctx.setGlobalAlpha(1)
+      /* 绘制文字 位置自己计算 参数自己看文档 */
+      ctx.setTextAlign('left')                        //  位置
+      ctx.setFillStyle('black')                       //  颜色
+      ctx.setFontSize(18)                               //  字号
+      ctx.fillText('古剑奇谭网络版配装器', 50, 20)         //  内容  不会自己换行 需手动换行
+
+      //装备
+      ctx.setFontSize(16)
+      for (var i = 0; i < this.data.equipArray.length; i++) {
+        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameShort, 5, 25 * i + 40)
+      }
+      ctx.setFontSize(8)
+      ctx.setFillStyle('#666666')
+      for (var i = 0; i < this.data.equipArray.length; i++) {
+        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameLong, 5, 25 * i + 50)
+      }
+      //附魔宝石
+      ctx.setFontSize(12)
+      ctx.fillText(this.data.stoneArray[0][this.data.stoneIndexArray[0]].nameShort, 125, 25 * 1 + 40)
+      ctx.fillText(this.data.stoneArray[1][this.data.stoneIndexArray[1]].nameShort, 180, 25 * 1 + 40)
+      ctx.fillText(this.data.stoneArray[2][this.data.stoneIndexArray[2]].nameShort, 125, 25 * 2 + 40)
+      ctx.fillText(this.data.stoneArray[3][this.data.stoneIndexArray[3]].nameShort, 180, 25 * 2 + 40)
+      ctx.fillText(this.data.stoneArray[4][this.data.stoneIndexArray[4]].nameShort, 125, 25 * 3 + 40)
+      ctx.fillText(this.data.stoneArray[5][this.data.stoneIndexArray[5]].nameShort, 180, 25 * 3 + 40)
+      ctx.fillText(this.data.stoneArray[6][this.data.stoneIndexArray[6]].nameShort, 110, 25 * 10 + 40)
+      ctx.fillText(this.data.stoneArray[7][this.data.stoneIndexArray[7]].nameShort, 110, 25 * 13 + 40)
+      ctx.fillText(this.data.stoneArray[8][this.data.stoneIndexArray[8]].nameShort, 110, 25 * 14 + 40)
+
+      ctx.fillText(this.data.enchantArray[0][this.data.enchantIndexArray[0]].name, 110, 25 * 0 + 40)
+      ctx.fillText(this.data.enchantArray[1][this.data.enchantIndexArray[1]].name, 110, 25 * 4 + 40)
+      ctx.fillText(this.data.enchantArray[2][this.data.enchantIndexArray[2]].name, 110, 25 * 5 + 40)
+      ctx.fillText(this.data.enchantArray[3][this.data.enchantIndexArray[3]].name, 110, 25 * 6 + 40)
+      ctx.fillText(this.data.enchantArray[4][this.data.enchantIndexArray[4]].name, 110, 25 * 7 + 40)
+      ctx.fillText(this.data.enchantArray[5][this.data.enchantIndexArray[5]].name, 110, 25 * 8 + 40)
+      ctx.fillText(this.data.enchantArray[6][this.data.enchantIndexArray[6]].name, 110, 25 * 9 + 40)
+
+      //星蕴
+      ctx.setFontSize(16)
+      ctx.setFillStyle('black')
+      ctx.fillText('星蕴', 160, 140)
+      ctx.setFontSize(12)
+      for (var i = 0; i < this.data.starArray.length; i++) {
+        ctx.fillText(this.data.starArray[i].name, 160, 15 * i + 160)
+      }
+      ctx.setFillStyle('#666666')
+      for (var i = 0; i < this.data.starArray.length; i++) {
+        ctx.fillText(this.data.starArray[i].value, 190, 15 * i + 160)
+      }
+
+      //食品
+      ctx.setFontSize(16)
+      ctx.setFillStyle('black')
+      ctx.fillText('增益', 230, 140)
+      ctx.setFontSize(12)
+      var strList = new Array();
+      for (var i = 0; i < this.data.foodArray.length; i++) {
+        if (this.data.foodIndexArray[i] != 0)
+          strList.push(this.data.foodArray[i][this.data.foodIndexArray[i]].nameShort);
+      }
+      if (this.data.huben != 0)
+        strList.push("虎贲" + this.data.huben)
+      if (this.data.kanglong != 0)
+        strList.push("亢行" + this.data.kanglong)
+
+      for (var i = 0; i < strList.length; i++) {
+        ctx.fillText(strList[i], 230, 15 * i + 160)
+      }
+
+      ctx.setFontSize(16)
+      ctx.setFillStyle('black')
+      ctx.fillText('面板', 180, 280)
+      ctx.setFontSize(12)
+      for (var i = 0; i < this.data.propertyList.length; i++) {
+        ctx.setFillStyle('black')
+        ctx.fillText(this.data.propertyList[i].name, 180, 15 * i + 300)
+        ctx.setFillStyle('#666666')
+        ctx.fillText(this.data.propertyList[i].percent, 210, 15 * i + 300)
+      }
+      ctx.drawImage('../../../' + res[1].path, 231, 0, 59, 59)
+
+      /* 绘制 */
+      ctx.stroke()
+      ctx.draw()
+    })
+  },
+  save: function () {
+    var that = this
+    wx.canvasToTempFilePath({
+      canvasId: 'shareImg',
+      success(res) {
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+        })
+        wx.showToast({
+          title: '保存成功',
+          icon: 'succes',
+          duration: 1000,
+          mask: true
+        })
+        that.setData({
+          showCanvas: true
+        })
+      }
+    }, this)
+  },
+
+  closeCanvas: function () {
+    this.setData({
+      showCanvas: true
+    })
+  },
 
   footerTap: app.footerTap 
 })

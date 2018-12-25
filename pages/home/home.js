@@ -61,6 +61,23 @@ Page({
       url: '/pages/zf/djjw/djjw'
     })
   },
+  NavigatorToDYS: function () {
+    wx.navigateTo({
+      url: '/pages/mf/dys/dys'
+    })
+  },
+  NavigatorToWSZYZ: function () {
+    wx.navigateTo({
+      url: '/pages/sm/wszyz/wszyz'
+    })
+  },
+  NavigatorToSYXJ: function () {
+    wx.navigateTo({
+      url: '/pages/zy/syxj/syxj'
+    })
+  },
+
+
   /**
    * 生命周期函数--监听页面显示
    */

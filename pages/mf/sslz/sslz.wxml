@@ -15,7 +15,7 @@
         <text  class='setcontext' > {{equipArray[equipForIndex][equipIndexArray[equipForIndex]].nameLong}}</text>
       </picker>
     </view>
-  </view>
+  </view>  
 </view>
 
 
@@ -58,7 +58,7 @@
       <text>{{starArray[starForIndex].name}}  </text>
       <input style='text-align:right' type="number" placeholder="请输入数字"  bindblur="starInputChange" data-idx = "{{starForIndex}}">
       </input>
-  </view>
+    </view>
   </view>
 
   <view class='viewShadow'>
@@ -75,10 +75,10 @@
       <text class='viewTitleWord'>亢行</text>
       <text class='viewTitleSemiWord'>{{kanglong}}%会心</text>
     </view>
-    <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='kanglongSlider' bindchange='kanglongSlider'>
-    </slider>
-  </view>
-
+      <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='kanglongSlider' bindchange='kanglongSlider'>
+      </slider>
+   </view>
+<!--
   <view class='viewShadow'>
     <view class='viewTitle'>
       <text class='viewTitleWord'>天枪</text>
@@ -87,6 +87,25 @@
     <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='tianqiangSlider' bindchange='tianqiangSlider'>
     </slider>
   </view>
+
+  <view class='viewShadow'>
+    <view class='viewTitle'>
+      <text class='viewTitleWord'>职业BUFF</text>
+    </view>
+    <view style='display:flex;flex-flow:row;flex-wrap:wrap'>
+      <view class='switchContent'><switch bindchange="jzySwitch" color ='rgb(228,194,131)'/>
+        <text class='viewTitleSemiWord'>惊徵羽</text></view>
+      <view class='switchContent'><switch bindchange="yanguangSwitch" color ='rgb(228,194,131)'/>
+        <text class='viewTitleSemiWord'>9%炎光</text></view>
+      <view class='switchContent'><switch bindchange="chongmingSwitch" color ='rgb(228,194,131)'/>
+        <text class='viewTitleSemiWord'>崇明</text></view>
+
+      <view class='switchContent'><switch bindchange="switch2Change" color ='rgb(228,194,131)'/>
+        <text class='viewTitleSemiWord'>霜城</text></view>
+
+    </view>
+  </view>
+  -->
 </view>
 
 <!--残卷食品-->
@@ -116,9 +135,9 @@
 
   <view class='viewShadow'>
       <view class='picker'>
-        <text class='viewTitle'  >食品</text>
+        <text class='viewTitle'>食品</text>
       </view>
-      <view class="li"  wx:for="{{foodPlace}}" wx:for-index="foodForIndex" > 
+      <view class="li" wx:for="{{foodPlace}}" wx:for-index="foodForIndex" > 
         <view  class="picker"> 
           <picker class= "picker" mode="selector" bindchange = "foodPickerChange"  value="{{foodIndexArray[foodForIndex]}}" range="{{foodArray[foodForIndex]}}" range-key="name"  data-idx = "{{foodForIndex}}"> 
             <text >{{foodPlace[foodForIndex].value}}  </text> 
@@ -146,7 +165,7 @@
        <view style='text-align:right'>{{zuizhong}}</view>
      </view>
    </view>
-
+<!--
    <view class='viewShadow'>
      <view class='viewTitle'>
        <text class='viewTitleWord'>需求命中</text>
@@ -172,4 +191,16 @@
       <text style='text-align:right;color:#888888'>{{dpsWithZJ}}</text>
     </view>    
   </view>
+
+<!-- 生成分享图 这里的操作是把canvas绘制的图预览出来  -->
+<button class='share' type='primary' bindtap='share'>生成分享图</button>
+<view class="modalDlg" hidden="{{showCanvas}}">    
+    <canvas  canvas-id="shareImg" style='width:290px;height:403px;margin-top:5%'></canvas>
+    <view class='modal-btn-wrapper'>
+      <view class='cancel-btn' style='color:rgba(7,17,27,0.6)' bindtap='closeCanvas'>取消</view>
+      <view class='confirm-btn' style='color:#1AAD19' bindtap='save'>保存到相册</view>
+    </view>
+</view>
+<view class="mask" catchtouchmove="preventTouchMove" hidden="{{showCanvas}}"></view>
+
 </view>

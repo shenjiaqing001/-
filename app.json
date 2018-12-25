@@ -2,12 +2,15 @@
   "pages": [
     "pages/home/home",
     "pages/mf/sslz/sslz",
+    "pages/mf/dys/dys",
     "pages/sm/hlz/hlz",
+    "pages/sm/wszyz/wszyz",
     "pages/tg/lcfj/lcfj",
     "pages/yj/shj/shj",
     "pages/yj/fxp/fxp",
     "pages/zy/qmgz/qmgz",
-    "pages/zf/djjw/djjw"
+    "pages/zf/djjw/djjw",
+    "pages/zy/syxj/syxj"
   ],
   "window": {
     "backgroundTextStyle": "light",
