@@ -77,15 +77,6 @@
     <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(110,157,180)' block-color='rgb(110,157,180)' block-size='15' bindchanging='zongzhengSlider' bindchange='zongzhengSlider'>
     </slider>
   </view>
-
-  <view class='viewShadow'>
-    <view class='viewTitle'>
-      <text class='viewTitleWord'>亢行</text>
-      <text class='viewTitleSemiWord'>{{kanglong}}%会心</text>
-    </view>
-    <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(110,157,180)' block-color='rgb(110,157,180)' block-size='15' bindchanging='kanglongSlider' bindchange='kanglongSlider'>
-    </slider>
-  </view>
 </view>
 
 <!--残卷食品-->
@@ -141,5 +132,13 @@
        <text class='textS'>{{propertyList[propForIndex].percent}}</text>   
      </view>
    </view>
-   
+  <button class='share' type='primary' bindtap='share'>生成分享图</button>
+  <view class="modalDlg" hidden="{{showCanvas}}">    
+    <canvas  canvas-id="shareImg" style='width:290px;height:403px;margin-top:5%'></canvas>
+    <view class='modal-btn-wrapper'>
+      <view class='cancel-btn' style='color:rgba(7,17,27,0.6)' bindtap='closeCanvas'>取消</view>
+      <view class='confirm-btn' style='color:#1AAD19' bindtap='save'>保存到相册</view>
+    </view>
+  </view>
+  <view class="mask" catchtouchmove="preventTouchMove" hidden="{{showCanvas}}"></view>
 </view>

@@ -141,5 +141,5 @@
       <view class='confirm-btn' style='color:#1AAD19' bindtap='save'>保存到相册</view>
     </view>
   </view>
-<view class="mask" catchtouchmove="preventTouchMove" hidden="{{showCanvas}}"></view>
+  <view class="mask" catchtouchmove="preventTouchMove" hidden="{{showCanvas}}"></view>
 </view>

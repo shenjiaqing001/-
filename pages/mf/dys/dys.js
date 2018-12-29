@@ -4,7 +4,7 @@ Page({
     navbar: ['装备', '附魔/宝石', '星蕴/特技', '附加属性', "属性"],
     winHeight: "",//窗口高度
     currentTab: 0, //预设当前项的值
-    equipArray: [ ],
+    equipArray: [],
     showCanvas: true,
 
     equipIndexArray: [
@@ -30,7 +30,7 @@ Page({
       { name: '戒指2', value: '戒指2' },
     ],
     //附魔-------------------------------------------------------------------------------------------------------------------------
-    enchantIndex: 0,   
+    enchantIndex: 0,
     enchantPlace: [
       { name: '武器', value: '武器', show: false },
       { name: '头', value: '头', show: false },
@@ -40,13 +40,13 @@ Page({
       { name: '裤', value: '裤', show: false },
       { name: '鞋', value: '鞋', show: false },
     ],
-   enchantIndexArray: [
-     0, 0, 0, 0, 0, 0, 0,
+    enchantIndexArray: [
+      0, 0, 0, 0, 0, 0, 0,
     ],
 
-   enchantArray: [ ],
+    enchantArray: [],
 
-   //食品-----------------------------------------------------------------------------------------------------------------------
+    //食品-----------------------------------------------------------------------------------------------------------------------
     foodIndex: 0,
     foodPlace: [
       { name: '攻击食品', value: '攻击食品', show: false },
@@ -88,28 +88,28 @@ Page({
       { name: "治疗", value: 0 },
     ],
 
-    zhiyouArray:[
+    zhiyouArray: [
       { name: "1%会心", value: 0, checked: false },
       { name: "1%专精", value: 1, checked: false },
       { name: "1%强度", value: 2, checked: false }
     ],
-    zhiyouList :[],
+    zhiyouList: [],
 
     xlwArray: [
       { name: "1%会心", value: 0, checked: false },
       { name: "1%强度", value: 1, checked: false },
       { name: "1%急速", value: 2, checked: false }
     ],
-    xlwBuff:0,
+    xlwBuff: 0,
 
-    属性 : -1,
-    攻击 : -1,
-    会心 : -1,
-    强度 : -1,
-    治疗:-1,
-    专精:-1,
-    急速:-1,
-    法力:-1,
+    属性: -1,
+    攻击: -1,
+    会心: -1,
+    强度: -1,
+    治疗: -1,
+    专精: -1,
+    急速: -1,
+    法力: -1,
 
     zongzheng: 0,
     kangchi: 0,
@@ -125,13 +125,13 @@ Page({
       { name: "治疗", value: 0, percent: 0 },
     ],
 
-    zhiliao:0,
+    zhiliao: 0,
   },
 
   //挚友
   mutiCheckBox: function (e) {
     this.setData({
-      zhiyouList : e.detail.value
+      zhiyouList: e.detail.value
     })
     this.updatePorperty()
   },
@@ -139,7 +139,7 @@ Page({
   //血露薇
   singleCheckBox: function (e) {
     this.setData({
-        xlwBuff :e.detail.value      
+      xlwBuff: e.detail.value
     })
     this.updatePorperty()
   },
@@ -156,7 +156,7 @@ Page({
     this.updatePorperty()
   },
 
-//附魔
+  //附魔
   enchantPickerChange: function (e) {
     var index = this.data.index
     const curindex = e.target.dataset.idx
@@ -168,14 +168,14 @@ Page({
   },
 
   //宝石
- stonePickerChange: function (e) {
+  stonePickerChange: function (e) {
     var index = this.data.index
     const curindex = e.target.dataset.idx
     this.data.stoneIndexArray[curindex] = e.detail.value
     this.setData({
       stoneIndexArray: this.data.stoneIndexArray
     })
-   this.updatePorperty()
+    this.updatePorperty()
   },
 
   //食品
@@ -233,7 +233,7 @@ Page({
     })
   },
 
-//onload 
+  //onload 
   onLoad: function () {
     var that = this;
 
@@ -255,7 +255,7 @@ Page({
       if (this.data.propertyList[index].name == "法力")
         this.data.法力 = index
     }
-   
+
     //  高度自适应
     wx.getSystemInfo({
       success: function (res) {
@@ -276,7 +276,7 @@ Page({
     }).get({
       success: res => {
         this.setData({
-          enchantArray : res.data[0].enchant_Health,
+          enchantArray: res.data[0].enchant_Health,
         })
       },
     })
@@ -307,14 +307,14 @@ Page({
       success: res => {
         this.setData({
           //enchantArray: res.data[0],
-          equipArray: res.data[0].equip,
+          equipArray: res.data[0].equipMFN,
         })
       },
     })
   },
 
-  getDecimal:function(num){
-    return Math.round(num*100)/100
+  getDecimal: function (num) {
+    return Math.round(num * 100) / 100
   },
 
   updatePorperty: function () {
@@ -422,7 +422,7 @@ Page({
           if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].法力 != null)
             this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].法力
         }
-      } 
+      }
 
       for (var index2 in this.data.foodPlace) {
         if (this.data.propertyList[index].name == "属性") {
@@ -453,17 +453,17 @@ Page({
           if (this.data.foodArray[index2][this.data.foodIndexArray[index2]].专精 != null)
             this.data.propertyList[index].value += this.data.foodArray[index2][this.data.foodIndexArray[index2]].专精
         }
-      } 
-      
+      }
+
       for (var index2 in this.data.starArray)
-        if (this.data.propertyList[index].name == this.data.starArray[index2].name){
-          if (this.data.starArray[index2].value != null){
-             if(!isNaN(this.data.starArray[index2].value))
+        if (this.data.propertyList[index].name == this.data.starArray[index2].name) {
+          if (this.data.starArray[index2].value != null) {
+            if (!isNaN(this.data.starArray[index2].value))
               this.data.propertyList[index].value += this.data.starArray[index2].value
           }
-        }      
+        }
     }
-    
+
     this.data.propertyList[this.data.属性].value += 40
     this.data.propertyList[this.data.攻击].value += 15
     this.data.propertyList[this.data.攻击].value += this.data.propertyList[this.data.属性].value * 0.15
@@ -477,17 +477,17 @@ Page({
     this.data.propertyList[this.data.属性].percent = this.data.propertyList[this.data.属性].value
     this.data.propertyList[this.data.攻击].percent = this.data.propertyList[this.data.攻击].value
     this.data.propertyList[this.data.专精].percent = this.data.propertyList[this.data.专精].value
-    this.data.propertyList[this.data.会心].percent =this.data.propertyList[this.data.会心].value * 0.075 + this.data.kanglong
+    this.data.propertyList[this.data.会心].percent = this.data.propertyList[this.data.会心].value * 0.075
     this.data.propertyList[this.data.强度].percent = this.data.propertyList[this.data.强度].value
     this.data.propertyList[this.data.急速].percent = this.data.propertyList[this.data.急速].value * 0.085
     this.data.propertyList[this.data.法力].percent = this.data.propertyList[this.data.法力].value
 
 
     //血露薇
-    if (this.data.xlwBuff == 0) this.data.propertyList[this.data.会心].percent+=1
+    if (this.data.xlwBuff == 0) this.data.propertyList[this.data.会心].percent += 1
     else if (this.data.xlwBuff == 1) this.data.propertyList[this.data.强度].percent += 10
     else if (this.data.xlwBuff == 2) this.data.propertyList[this.data.急速].percent += 1
-    
+
     //挚友
     if (this.data.zhiyouList.indexOf("0") != -1) {
       this.data.propertyList[this.data.会心].percent += 1
@@ -499,7 +499,7 @@ Page({
       this.data.propertyList[this.data.强度].percent += 10
     }
 
-    this.data.propertyList[this.data.治疗].value = this.data.propertyList[this.data.治疗].value * (1 + (0.2 + this.data.zongzheng/100) * (1 + this.data.kangchi / 100)  + this.data.propertyList[this.data.强度].percent * 0.0005)
+    this.data.propertyList[this.data.治疗].value = this.data.propertyList[this.data.治疗].value * (1 + (0.2 + this.data.zongzheng / 100) * (1 + this.data.kangchi / 100) + this.data.propertyList[this.data.强度].percent * 0.0005)
     this.data.propertyList[this.data.治疗].percent = this.data.propertyList[this.data.治疗].value
 
     for (var index in this.data.propertyList) {
@@ -616,8 +616,8 @@ Page({
       }
       if (this.data.zongzheng != 0)
         strList.push("宗正" + this.data.zongzheng);
-      if(this.data.kangchi!=0)
-        strList.push("亢池"+this.data.kangchi);
+      if (this.data.kangchi != 0)
+        strList.push("亢池" + this.data.kangchi);
 
       for (var i = 0; i < strList.length; i++) {
         ctx.fillText(strList[i], 230, 15 * i + 160)
@@ -668,5 +668,5 @@ Page({
     })
   },
 
-  footerTap: app.footerTap 
+  footerTap: app.footerTap
 })
