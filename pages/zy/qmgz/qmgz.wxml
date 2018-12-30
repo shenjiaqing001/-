@@ -174,13 +174,16 @@
     </view>    
   </view>
 -->
-  <button class='share' type='primary' bindtap='share'>生成分享图</button>
-<view class="modalDlg" hidden="{{showCanvas}}">    
-    <canvas  canvas-id="shareImg" style='width:290px;height:403px;margin-top:5%'></canvas>
-    <view class='modal-btn-wrapper'>
+<button class='share' type='primary' bindtap='drawCanvas'>配装总览</button>
+<view class="modalDlg" hidden="{{showCanvas}}">
+    <view class='modal-btn-wrapper-top'>
+    </view>
+    <image src='{{shareImgUrl}}' bindtap='previewImage' mode='widthFix' style='width:100%'></image> 
+    <view class='modal-btn-wrapper-bottom'>
       <view class='cancel-btn' style='color:rgba(7,17,27,0.6)' bindtap='closeCanvas'>取消</view>
       <view class='confirm-btn' style='color:#1AAD19' bindtap='save'>保存到相册</view>
     </view>
 </view>
 <view class="mask" catchtouchmove="preventTouchMove" hidden="{{showCanvas}}"></view>
+<canvas  canvas-id="shareImg" style='width:863px;height:485px;position:fixed;left:2000px;top:0;'></canvas>
 </view>

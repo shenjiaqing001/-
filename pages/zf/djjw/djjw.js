@@ -6,6 +6,7 @@ Page({
     currentTab: 0, //预设当前项的值
     equipArray: [ ],
     showCanvas: true,
+    shareImgUrl: [],
     equipIndexArray: [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ],
@@ -95,7 +96,7 @@ Page({
     zhiyouList :[],
 
     xlwArray: [
-      { name: "1%会心", value: 0, checked: false },
+      { name: "1%会心", value: 0, checked: true },
       { name: "1%专注", value: 1, checked: false },
       { name: "1%强度", value: 2, checked: false },
       { name: "1%急速", value: 3, checked: false }
@@ -538,15 +539,11 @@ Page({
     })
   },
 
-  share: function () {
-    this.setData({
-      showCanvas: false
-    })
+  drawCanvas: function () {
     let promise1 = new Promise(function (resolve, reject) {
-
       /* 获得要在画布上绘制的图片 */
       wx.getImageInfo({
-        src: '../../../image/zf_bg.jpg',
+        src: '../../../image/zf_bg_middle.jpg',
         success: function (res) {
           resolve(res);
         }
@@ -569,118 +566,161 @@ Page({
       /* 创建 canvas 画布 */
       const ctx = wx.createCanvasContext('shareImg')
       ctx.setFillStyle('white')
-      ctx.fillRect(0, 0, 290, 403)
+      ctx.fillRect(0, 0, 863, 485)
 
-      ctx.setGlobalAlpha(0.2)
       /* 绘制图像到画布  图片的位置你自己计算好就行 参数的含义看文档 */
       /* ps: 网络图片的话 就不用加../../路径了 反正我这里路径得加 */
-      ctx.drawImage('../../../' + res[0].path, 0, 0, 290, 403)
-      // ctx.drawImage('../../../' + res[1].path, 0, 0, 545, 771)
+      ctx.setGlobalAlpha(0.3)
+      ctx.drawImage('../../../' + res[0].path, 0, 0, 863, 485)
       ctx.setGlobalAlpha(1)
+
       /* 绘制文字 位置自己计算 参数自己看文档 */
       ctx.setTextAlign('left')                        //  位置
       ctx.setFillStyle('black')                       //  颜色
-      ctx.setFontSize(18)                               //  字号
-      ctx.fillText('古剑奇谭网络版配装器', 50, 20)         //  内容  不会自己换行 需手动换行
+      ctx.setFontSize(30)                             //  字号
+      ctx.fillText('古剑奇谭网络版配装器', 250, 40)     //  内容  不会自己换行 需手动换行
+
+      ctx.setFontSize(24)
+      ctx.fillText('门派：斩风    专精：弹铗九问', 450, 80)
 
       //装备
-      ctx.setFontSize(16)
+      ctx.setFontSize(18)
       for (var i = 0; i < this.data.equipArray.length; i++) {
-        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameShort, 5, 25 * i + 40)
+        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameShort, 40, 27 * i + 80)
       }
       ctx.setFontSize(8)
       ctx.setFillStyle('#666666')
       for (var i = 0; i < this.data.equipArray.length; i++) {
-        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameLong, 5, 25 * i + 50)
+        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameLong, 40, 27 * i + 90)
       }
       //附魔宝石
       ctx.setFontSize(12)
-      ctx.fillText(this.data.stoneArray[0][this.data.stoneIndexArray[0]].nameShort, 125, 25 * 1 + 40)
-      ctx.fillText(this.data.stoneArray[1][this.data.stoneIndexArray[1]].nameShort, 180, 25 * 1 + 40)
-      ctx.fillText(this.data.stoneArray[2][this.data.stoneIndexArray[2]].nameShort, 125, 25 * 2 + 40)
-      ctx.fillText(this.data.stoneArray[3][this.data.stoneIndexArray[3]].nameShort, 180, 25 * 2 + 40)
-      ctx.fillText(this.data.stoneArray[4][this.data.stoneIndexArray[4]].nameShort, 125, 25 * 3 + 40)
-      ctx.fillText(this.data.stoneArray[5][this.data.stoneIndexArray[5]].nameShort, 180, 25 * 3 + 40)
-      ctx.fillText(this.data.stoneArray[6][this.data.stoneIndexArray[6]].nameShort, 110, 25 * 10 + 40)
-      ctx.fillText(this.data.stoneArray[7][this.data.stoneIndexArray[7]].nameShort, 110, 25 * 13 + 40)
-      ctx.fillText(this.data.stoneArray[8][this.data.stoneIndexArray[8]].nameShort, 110, 25 * 14 + 40)
+      ctx.fillText(this.data.stoneArray[0][this.data.stoneIndexArray[0]].nameShort, 200, 27 * 1 + 80)
+      ctx.fillText(this.data.stoneArray[1][this.data.stoneIndexArray[1]].nameShort, 280, 27 * 1 + 80)
+      ctx.fillText(this.data.stoneArray[2][this.data.stoneIndexArray[2]].nameShort, 200, 27 * 2 + 80)
+      ctx.fillText(this.data.stoneArray[3][this.data.stoneIndexArray[3]].nameShort, 280, 27 * 2 + 80)
+      ctx.fillText(this.data.stoneArray[4][this.data.stoneIndexArray[4]].nameShort, 200, 27 * 3 + 80)
+      ctx.fillText(this.data.stoneArray[5][this.data.stoneIndexArray[5]].nameShort, 280, 27 * 3 + 80)
+      ctx.fillText(this.data.stoneArray[6][this.data.stoneIndexArray[6]].nameShort, 200, 27 * 10 + 80)
+      ctx.fillText(this.data.stoneArray[7][this.data.stoneIndexArray[7]].nameShort, 200, 27 * 13 + 80)
+      ctx.fillText(this.data.stoneArray[8][this.data.stoneIndexArray[8]].nameShort, 200, 27 * 14 + 80)
 
-      ctx.fillText(this.data.enchantArray[0][this.data.enchantIndexArray[0]].name, 110, 25 * 0 + 40)
-      ctx.fillText(this.data.enchantArray[1][this.data.enchantIndexArray[1]].name, 110, 25 * 4 + 40)
-      ctx.fillText(this.data.enchantArray[2][this.data.enchantIndexArray[2]].name, 110, 25 * 5 + 40)
-      ctx.fillText(this.data.enchantArray[3][this.data.enchantIndexArray[3]].name, 110, 25 * 6 + 40)
-      ctx.fillText(this.data.enchantArray[4][this.data.enchantIndexArray[4]].name, 110, 25 * 7 + 40)
-      ctx.fillText(this.data.enchantArray[5][this.data.enchantIndexArray[5]].name, 110, 25 * 8 + 40)
-      ctx.fillText(this.data.enchantArray[6][this.data.enchantIndexArray[6]].name, 110, 25 * 9 + 40)
+      ctx.fillText(this.data.enchantArray[0][this.data.enchantIndexArray[0]].name, 200, 27 * 0 + 80)
+      ctx.fillText(this.data.enchantArray[1][this.data.enchantIndexArray[1]].name, 200, 27 * 4 + 80)
+      ctx.fillText(this.data.enchantArray[2][this.data.enchantIndexArray[2]].name, 200, 27 * 5 + 80)
+      ctx.fillText(this.data.enchantArray[3][this.data.enchantIndexArray[3]].name, 200, 27 * 6 + 80)
+      ctx.fillText(this.data.enchantArray[4][this.data.enchantIndexArray[4]].name, 200, 27 * 7 + 80)
+      ctx.fillText(this.data.enchantArray[5][this.data.enchantIndexArray[5]].name, 200, 27 * 8 + 80)
+      ctx.fillText(this.data.enchantArray[6][this.data.enchantIndexArray[6]].name, 200, 27 * 9 + 80)
 
       //星蕴
-      ctx.setFontSize(16)
+      ctx.setFontSize(24)
       ctx.setFillStyle('black')
-      ctx.fillText('星蕴', 160, 140)
-      ctx.setFontSize(12)
-      for (var i = 0; i < this.data.starArray.length; i++) {
-        ctx.fillText(this.data.starArray[i].name, 160, 15 * i + 160)
-      }
-      ctx.setFillStyle('#666666')
-      for (var i = 0; i < this.data.starArray.length; i++) {
-        ctx.fillText(this.data.starArray[i].value, 190, 15 * i + 160)
-      }
+      ctx.fillText('星蕴', 450, 130)
+      ctx.setFontSize(18)
+      for (var i = 0; i < this.data.starArray.length; i++)
+        ctx.fillText(this.data.starArray[i].name, 450 + (i % 2) * 100, 25 * (i - i % 2) / 2 + 155)
 
-      //食品
-      ctx.setFontSize(16)
+      ctx.setTextAlign('right')
+      ctx.setFillStyle('#666666')
+      for (var i = 0; i < this.data.starArray.length; i++)
+        ctx.fillText(this.data.starArray[i].value, 530 + (i % 2) * 100, 25 * (i - i % 2) / 2 + 155)
+      ctx.setTextAlign('left')
+
+      //增益
+      ctx.setFontSize(24)
       ctx.setFillStyle('black')
-      ctx.fillText('增益', 230, 140)
-      ctx.setFontSize(12)
+      ctx.fillText('附加属性', 450, 265)
+      ctx.setFontSize(18)
       var strList = new Array();
       for (var i = 0; i < this.data.foodArray.length; i++) {
         if (this.data.foodIndexArray[i] != 0)
           strList.push(this.data.foodArray[i][this.data.foodIndexArray[i]].nameShort);
       }
       if (this.data.huben != 0)
-        strList.push("虎贲" + this.data.huben)
+        strList.push("虎贲" + this.data.huben + '%命中')
       if (this.data.kanglong != 0)
-        strList.push("亢行" + this.data.kanglong)
+        strList.push("亢行" + this.data.kanglong + '%会心')
+      if (this.data.xlwBuff == 0) strList.push('血露薇1%会心')
+      else if (this.data.xlwBuff == 1) strList.push('血露薇1%专注')
+      else if (this.data.xlwBuff == 2) strList.push('血露薇1%强度')
+      else if (this.data.xlwBuff == 3) strList.push('血露薇1%急速')
+      if (this.data.zhiyouList.indexOf("0") != -1) {
+        strList.push('挚友1%会心')
+      }
+      if (this.data.zhiyouList.indexOf("1") != -1) {
+        strList.push('挚友1%专精')
+      }
+      if (this.data.zhiyouList.indexOf("2") != -1) {
+        strList.push('挚友1%强度')
+      }
 
       for (var i = 0; i < strList.length; i++) {
-        ctx.fillText(strList[i], 230, 15 * i + 160)
+        ctx.fillText(strList[i], 450, 23 * i + 290)
       }
 
-      ctx.setFontSize(16)
+      ctx.setFontSize(24)
       ctx.setFillStyle('black')
-      ctx.fillText('面板', 180, 280)
-      ctx.setFontSize(12)
+      ctx.fillText('面板', 700, 130)
+      ctx.setFontSize(18)
       for (var i = 0; i < this.data.propertyList.length; i++) {
         ctx.setFillStyle('black')
-        ctx.fillText(this.data.propertyList[i].name, 180, 15 * i + 300)
+        ctx.fillText(this.data.propertyList[i].name, 700, 25 * i + 155)
         ctx.setFillStyle('#666666')
-        ctx.fillText(this.data.propertyList[i].percent, 210, 15 * i + 300)
+        ctx.setTextAlign('right')
+        ctx.fillText(this.data.propertyList[i].percent, 800, 25 * i + 155)
+        ctx.setTextAlign('left')
       }
-      ctx.drawImage('../../../' + res[1].path, 231, 0, 59, 59)
+      ctx.setFillStyle('black')
+      ctx.fillText('最终', 700, 25 * 7 + 155)
+      ctx.setFillStyle('#666666')
+      ctx.setTextAlign('right')
+      ctx.fillText(this.data.zuizhong, 800, 25 * 7 + 155)
+      ctx.setTextAlign('left')
+
+
+      ctx.drawImage('../../../' + res[1].path, 713, 335, 150, 150)
 
       /* 绘制 */
       ctx.stroke()
-      ctx.draw()
+      ctx.draw(false, this.showCanvas)
     })
   },
-  save: function () {
+
+  showCanvas: function () {
     var that = this
     wx.canvasToTempFilePath({
       canvasId: 'shareImg',
       success(res) {
-        wx.saveImageToPhotosAlbum({
-          filePath: res.tempFilePath,
-        })
-        wx.showToast({
-          title: '保存成功',
-          icon: 'succes',
-          duration: 1000,
-          mask: true
-        })
+        var strList = [];
+        strList.push(res.tempFilePath)
         that.setData({
-          showCanvas: true
+          shareImgUrl: strList,
+          showCanvas: false,
         })
       }
     }, this)
+  },
+
+  save: function () {
+    wx.saveImageToPhotosAlbum({
+      filePath: this.data.shareImgUrl[0],
+    })
+    wx.showToast({
+      title: '保存成功',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
+    this.setData({
+      showCanvas: true
+    })
+  },
+
+  previewImage: function () {
+    wx.previewImage({
+      urls: this.data.shareImgUrl
+    });
   },
 
   closeCanvas: function () {

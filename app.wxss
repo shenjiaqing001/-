@@ -94,7 +94,7 @@
 
 .modalDlg {
   position: fixed;
-  top: 5%;
+  top: 30%;
   left: 3%;
   right: 3%;
   margin:0 auto;
@@ -116,7 +116,15 @@
   z-index: 9000;
   opacity: 0.7;
 }
-.modal-btn-wrapper{
+.modal-btn-wrapper-top{
+ display: flex;
+ flex-direction: row;
+ height: 61rpx;
+ line-height: 61rpx;
+ width: 100%;
+ border-bottom: 2rpx solid rgba(7,17,27,0.1);
+}
+.modal-btn-wrapper-bottom{
  display: flex;
  flex-direction: row;
  height: 100rpx;
