@@ -494,7 +494,7 @@ Page({
     this.data.propertyList[this.data.会心].percent =this.data.propertyList[this.data.会心].value * 0.075 + this.data.kanglong
     this.data.propertyList[this.data.专注].percent = this.data.propertyList[this.data.专注].value * 0.06 + 80                                                                                                      +this.data.huben
     this.data.propertyList[this.data.强度].percent = this.data.propertyList[this.data.强度].value
-    this.data.propertyList[this.data.急速].percent = this.data.propertyList[this.data.急速].value * 0.085
+    this.data.propertyList[this.data.急速].percent = this.data.propertyList[this.data.急速].value / 12
 
     //血露薇
     if (this.data.xlwBuff == 0) this.data.propertyList[this.data.会心].percent+=1

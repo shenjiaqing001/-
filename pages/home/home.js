@@ -96,6 +96,11 @@ Page({
     })
   },
 
+  NavigatorToLiuyan: function () {
+    wx.navigateTo({
+      url: '/pages/liuyan/liuyan'
+    })
+  },
 
   /**
    * 生命周期函数--监听页面显示

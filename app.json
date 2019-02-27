@@ -10,7 +10,8 @@
     "pages/yj/fxp/fxp",
     "pages/zy/qmgz/qmgz",
     "pages/zf/djjw/djjw",
-    "pages/zy/syxj/syxj"
+    "pages/zy/syxj/syxj",
+    "pages/liuyan/liuyan"
   ],
   "window": {
     "backgroundTextStyle": "light",

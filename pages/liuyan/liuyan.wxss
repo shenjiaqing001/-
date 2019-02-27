@@ -1,0 +1,22 @@
+/* pages/liuyan/liuyan.wxss */
+
+.liuyan {
+  padding-left:28rpx;
+  padding-right:28rpx;
+  font-size:48rpx;
+  line-height:30rpx; 
+  margin-top:20rpx;
+  margin-bottom:20rpx;
+}
+
+.liuyanTextarea{
+  margin:0 auto;
+  padding-left:28rpx;
+  padding-right:28rpx;
+  font-size:36rpx;
+  line-height:30rpx; 
+  border:2rpx solid #1AAD19;
+  border-radius:20rpx;
+  margin-top:20rpx;
+  margin-bottom:20rpx;
+}
