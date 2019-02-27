@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    notice:"123123123",
+    showCanvas : true,
   },
 
   /**
@@ -23,7 +24,25 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    const db = wx.cloud.database()
+    // 查询当前用户所有的 counters
+    db.collection('notice').where({
+      _openid: this.data.openid
+    }).get({
+      success: res => {
+        console.log(res.data[0].notice)
+        this.setData({          
+          showCanvas:false,
+          notice: res.data[0].notice,
+        })
+      },
+    })
+  },
 
+  ok: function (e) {
+    this.setData({
+      showCanvas: true,
+    })
   },
 
   NavigatorToSSLZ:function(){
@@ -119,4 +138,7 @@ Page({
   onShareAppMessage: function () {
 
   }
+
+
+
 })

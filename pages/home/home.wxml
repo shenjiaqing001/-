@@ -51,8 +51,15 @@
     <button class="button:color6"   bindtap = "NavigatorToSYXJ">圣佑血祭</button>
   </view>
 
-
-  
+  <view class="modalDlg" hidden="{{showCanvas}}">
+    <view class='modal-btn-wrapper-top'>
+    </view>
+    <text> {{notice}}</text>
+    <view class='modal-btn-wrapper-bottom'>      
+      <view class='confirm-btn' style='color:#1AAD19' bindtap='ok'>确定</view>
+    </view>
+  </view>
+  <view class="mask" catchtouchmove="preventTouchMove" hidden="{{showCanvas}}"></view>
  
 </view>
 

@@ -558,7 +558,7 @@ Page({
       ctx.fillText('古剑奇谭网络版配装器', 250, 40)     //  内容  不会自己换行 需手动换行
 
       ctx.setFontSize(24)
-      ctx.fillText('门派：妙法    专精：三十六章', 450, 80)
+      ctx.fillText('门派：妙法    专精：洞渊书', 450, 80)
 
       //装备
       ctx.setFontSize(18)
@@ -615,9 +615,9 @@ Page({
           strList.push(this.data.foodArray[i][this.data.foodIndexArray[i]].nameShort);
       }
       if (this.data.zongzheng != 0)
-        strList.push("宗正" + this.data.huben + '%治疗强化')
+        strList.push("宗正" + this.data.zongzheng + '%治疗强化')
       if (this.data.kangchi != 0)
-        strList.push("亢池" + this.data.kanglong + '%治疗强化加成')
+        strList.push("亢池" + this.data.kangchi + '%治疗强化加成')
       if (this.data.xlwBuff == 0) strList.push('血露薇1%会心')
       else if (this.data.xlwBuff == 1) strList.push('血露薇1%强度')
       else if (this.data.xlwBuff == 2) strList.push('血露薇1%急速')      
