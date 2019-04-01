@@ -7,27 +7,36 @@
   </view>
 </view>
 
-<view hidden="{{currentTab !== 0}}">
-  <view class='viewShadow'>
-    <view class="li"  wx:for="{{equipPlace}}" wx:for-index="equipForIndex">
-      <picker class= "picker" mode="selector" bindchange = "equipPickerChange" value="{{equipIndexArray[equipForIndex]}}" range="{{equipArray[equipForIndex]}}" range-key="nameLong"  data-idx = "{{equipForIndex}}">
-        <text >{{equipPlace[equipForIndex].value}}  </text>
-        <text  class='setcontext' > {{equipArray[equipForIndex][equipIndexArray[equipForIndex]].nameLong}}</text>
+<view style='padding-bottom:50rpx' hidden="{{currentTab !== 0}}">
+  <view wx:for="{{equipPlace}}" wx:for-index="equipForIndex">
+    <view class='viewShadow'>
+      <view class='viewTitle'>
+        <text class='viewTitleWord'>{{equipPlace[equipForIndex].name}}</text>
+      </view>
+      <picker class= "picker" mode="multiSelector" 
+      bindchange = "bindMultiPickerChange"  bindcolumnchange = "bindMultiPickerColumnChange"
+       range="{{equipMutliArray[equipForIndex]}}"  data-idx = "{{equipForIndex}}">
+          <view class='equipBox'>
+            <text class='equipLeft'>{{equipMutliArray[equipForIndex][0][equipMutilIndexArray[equipForIndex][0]]}}</text>
+            <text class='equipRight'> 四大金刚  </text>
+            <text class='equipDetail'>{{equipDetail[equipForIndex]}}</text>
+          </view>
+          
       </picker>
+
+
     </view>
   </view>  
 </view>
-
-
 <view hidden="{{currentTab !== 1}}">
   <view class='viewShadow'>
     <view class='picker'>
-    <text class='viewTitle'  >附魔</text>
+    <text class='viewTitle'>附魔</text>
   </view>
   <view class="li"  wx:for="{{enchantPlace}}" wx:for-index="enchantForIndex" > 
     <view hidden= "{{enchantPlace[enchantForIndex].show}}" class="picker"> 
       <picker class= "picker" mode="selector" bindchange = "enchantPickerChange"  value="{{enchantIndexArray[enchantForIndex]}}" range="{{enchantArray[enchantForIndex]}}" range-key="name"  data-idx = "{{enchantForIndex}}"> 
-      <text >{{enchantPlace[enchantForIndex].value}}  </text> 
+        <text >{{enchantPlace[enchantForIndex].value}}  </text> 
         <text  class='setcontext' > {{enchantArray[enchantForIndex][enchantIndexArray[enchantForIndex]].name}}</text>
       </picker>
     </view>      
@@ -49,7 +58,6 @@
   </view>
  
 </view>
-
 <!--星蕴-->
 <view hidden="{{currentTab !== 2}}">
   <view class='viewShadow'>
@@ -78,36 +86,7 @@
       <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='kanglongSlider' bindchange='kanglongSlider'>
       </slider>
    </view>
-<!--
-  <view class='viewShadow'>
-    <view class='viewTitle'>
-      <text class='viewTitleWord'>天枪</text>
-      <text class='viewTitleSemiWord'>{{tianqiang}}%会心效果</text>
-    </view>
-    <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='tianqiangSlider' bindchange='tianqiangSlider'>
-    </slider>
-  </view>
-
-  <view class='viewShadow'>
-    <view class='viewTitle'>
-      <text class='viewTitleWord'>职业BUFF</text>
-    </view>
-    <view style='display:flex;flex-flow:row;flex-wrap:wrap'>
-      <view class='switchContent'><switch bindchange="jzySwitch" color ='rgb(228,194,131)'/>
-        <text class='viewTitleSemiWord'>惊徵羽</text></view>
-      <view class='switchContent'><switch bindchange="yanguangSwitch" color ='rgb(228,194,131)'/>
-        <text class='viewTitleSemiWord'>9%炎光</text></view>
-      <view class='switchContent'><switch bindchange="chongmingSwitch" color ='rgb(228,194,131)'/>
-        <text class='viewTitleSemiWord'>崇明</text></view>
-
-      <view class='switchContent'><switch bindchange="switch2Change" color ='rgb(228,194,131)'/>
-        <text class='viewTitleSemiWord'>霜城</text></view>
-
-    </view>
-  </view>
-  -->
 </view>
-
 <!--残卷食品-->
 <view hidden="{{currentTab !== 3}}">
   <!--挚友-->
@@ -165,34 +144,7 @@
        <view style='text-align:right'>{{zuizhong}}</view>
      </view>
    </view>
-<!--
-   <view class='viewShadow'>
-     <view class='viewTitle'>
-       <text class='viewTitleWord'>需求命中</text>
-       <text class='viewTitleSemiWord'>{{bossMingzhong}}%</text>
-     </view>
-     <slider min='100' max='108' step='4' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' show-value='true' block-color='#bbb' block-size='15' bindchange='bossSlider' bindchanging='bossSlider'>
-     </slider>
-     <view style='width:100%'>
-       <text>伤害期望:</text>
-       <text style='text-align:right;color:#888888'>{{dpsWithoutZJ}}</text>
-     </view>    
-   </view>
 
-  <view class='viewShadow'>
-    <view class='viewTitle'>
-      <text class='viewTitleWord'>专精技能伤害占比</text>
-      <text class='viewTitleSemiWord'>{{zjPercent}}%</text>
-    </view>
-    <slider min='0' max='100' step='1' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' show-value='true' block-color='#bbb' block-size='15' bindchange='zhuanjingSlider' bindchanging='zhuanjingSlider'>
-    </slider>
-    <view style='width:100%'>
-      <text >专精加权伤害期望:</text>
-      <text style='text-align:right;color:#888888'>{{dpsWithZJ}}</text>
-    </view>    
-  </view>
-
-<!-- 生成分享图 这里的操作是把canvas绘制的图预览出来  -->
 <button class='share' type='primary' bindtap='drawCanvas'>配装总览</button>
 <view class="modalDlg" hidden="{{showCanvas}}">
     <view class='modal-btn-wrapper-top'>

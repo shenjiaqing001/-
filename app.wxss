@@ -142,6 +142,36 @@
 }
  
 .cancel-btn{
- border-right: 2rpx solid rgba(7,17,27,0.1);
- 
+ border-right: 2rpx solid rgba(7,17,27,0.1); 
+}
+
+.equipBox{
+  display: flex;
+  height: 130rpx;
+  line-height: 60rpx;
+}
+
+.equipLeft{
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+
+.equipRight{
+  padding-right: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  position: absolute;
+  right: 20rpx;
+  font-size: 12pt;
+  color: #888888;
+}
+.equipDetail{
+  padding-right: 20rpx;
+  padding-left: 20rpx;
+  padding-top: 60rpx;
+  padding-bottom: 10rpx;
+  position: absolute;
+  font-size: 12pt;
+  color: #888888;
 }

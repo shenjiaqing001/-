@@ -18,8 +18,7 @@
   width: 95%;
   margin: 0 auto;
   margin-top:10rpx;
-  margin-bottom:30rpx;
-  border: 0;
+  margin-bottom:40rpx;
   border-radius: 14rpx;
   box-shadow: 3rpx 6rpx 10rpx 2rpx rgb(228,194,131);
 }

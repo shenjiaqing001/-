@@ -6,28 +6,64 @@ Page({
     currentTab: 0, //预设当前项的值
     shareImgUrl: [],
 
-    equipArray: [],
+    equipList: [],
+    levelList: [],
+    equipMutliArray:[],
+    equipMutilIndexArray:[
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0]
+    ],
+    equipDetail:[
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0",
+      "法强20.0急速20.0法强20.0急速20.0",
+    ],
     equipIndexArray: [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ],
 
     equipIndex: 0,
     equipPlace: [
-      { name: '武器', value: '武器' },
-      { name: '信物左', value: '信物左' },
-      { name: '信物中', value: '信物中' },
-      { name: '信物右', value: '信物右' },
-      { name: '头', value: '头' },
-      { name: '衣服', value: '衣服' },
-      { name: '护腕', value: '护腕' },
-      { name: '腰带', value: '腰带' },
-      { name: '裤', value: '裤' },
-      { name: '鞋', value: '鞋' },
-      { name: '项链', value: '项链' },
-      { name: '配1', value: '配1' },
-      { name: '配2', value: '配2' },
-      { name: '戒指1', value: '戒指1' },
-      { name: '戒指2', value: '戒指2' },
+      { name: '武器'},
+      { name: '信物左'},
+      { name: '信物中'},
+      { name: '信物右'},
+      { name: '头'},
+      { name: '衣服'},
+      { name: '护腕'},
+      { name: '腰带'},
+      { name: '裤'},
+      { name: '鞋'},
+      { name: '项链'},
+      { name: '配1'},
+      { name: '配2'},
+      { name: '戒指1'},
+      { name: '戒指2'},
     ],
     //附魔-------------------------------------------------------------------------------------------------------------------------
     enchantIndex: 0,
@@ -141,18 +177,6 @@ Page({
   singleCheckBox: function (e) {
     this.setData({
       xlwBuff: e.detail.value
-    })
-    this.updatePorperty()
-  },
-
-
-  // 装备
-  equipPickerChange: function (e) {
-    var index = this.data.index
-    const curindex = e.target.dataset.idx
-    this.data.equipIndexArray[curindex] = e.detail.value
-    this.setData({
-      equipIndexArray: this.data.equipIndexArray
     })
     this.updatePorperty()
   },
@@ -313,7 +337,6 @@ Page({
     }).get({
       success: res => {
         this.setData({
-          //enchantArray: res.data[0],
           enchantArray: res.data[0].enchant_DPS,
         })
       },
@@ -339,16 +362,51 @@ Page({
       },
     })
 
-    db.collection('equipS').where({
+    db.collection('equipment').where({
       _openid: this.data.openid
     }).get({
       success: res => {
+        var list = []
+        for (var index in res.data[0].equipList){
+          var name = []
+          for (var index2 in res.data[0].equipList[index])
+            name.push(res.data[0].equipList[index][index2].NameMF)
+          list.push([name, res.data[0].equipList[index][0].level])
+        }
         this.setData({
-          //enchantArray: res.data[0],
-          equipArray: res.data[0].equipMFDPS,
+          equipList: res.data[0].equipList,
+          levelList: res.data[0].levelList,
+          equipMutliArray:list,
         })
       },
     })
+  },
+
+  bindMultiPickerChange: function (e) {
+    const curindex = e.target.dataset.idx
+    var data = {
+      equipMutilIndexArray: this.data.equipMutilIndexArray,
+    };
+    if (e.detail.value[0] == null)
+      e.detail.value[0] = 0
+    if (e.detail.value[1] == null)
+      e.detail.value[1] = 0
+    data.equipMutilIndexArray[curindex] = e.detail.value
+    this.setData(data);
+    console.log(this.data.equipMutilIndexArray)
+  },
+
+  bindMultiPickerColumnChange: function (e) {
+    const curindex = e.target.dataset.idx
+    var data = {
+      equipMutliArray: this.data.equipMutliArray,
+    };
+    switch (e.detail.column) {
+      case 0:
+        data.equipMutliArray[curindex][1] = this.data.equipList[curindex][e.detail.value].level
+        break;
+    }
+    this.setData(data);
   },
 
   getDecimal: function (num) {
