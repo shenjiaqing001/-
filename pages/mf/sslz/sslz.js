@@ -27,21 +27,21 @@ Page({
       [0, 0]
     ],
     equipDetail:[
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0",
-      "法强20.0急速20.0法强20.0急速20.0",
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
     ],
     equipIndexArray: [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -367,12 +367,14 @@ Page({
     }).get({
       success: res => {
         var list = []
+        console.log(res.data[0])
         for (var index in res.data[0].equipList){
           var name = []
           for (var index2 in res.data[0].equipList[index])
-            name.push(res.data[0].equipList[index][index2].NameMF)
-          list.push([name, res.data[0].equipList[index][0].level])
+            name.push(res.data[0].equipList[index][index2].name)
+          list.push([name, res.data[0].equipList[index][0].level.split(";")])
         }
+        console.log(list)
         this.setData({
           equipList: res.data[0].equipList,
           levelList: res.data[0].levelList,
@@ -402,8 +404,11 @@ Page({
       equipMutliArray: this.data.equipMutliArray,
     };
     switch (e.detail.column) {
-      case 0:
-        data.equipMutliArray[curindex][1] = this.data.equipList[curindex][e.detail.value].level
+      case 0: 
+        {
+          var levels = this.data.equipList[curindex][e.detail.value].level;
+          data.equipMutliArray[curindex][1] = levels.split(";");
+        }        
         break;
     }
     this.setData(data);

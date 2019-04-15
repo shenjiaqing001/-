@@ -151,13 +151,13 @@
   line-height: 60rpx;
 }
 
-.equipLeft{
+.equipTopLeft{
   padding-left: 20rpx;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
 }
 
-.equipRight{
+.equipTopRight{
   padding-right: 20rpx;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
@@ -166,12 +166,21 @@
   font-size: 12pt;
   color: #888888;
 }
-.equipDetail{
+.equipBottomLeft{
   padding-right: 20rpx;
   padding-left: 20rpx;
   padding-top: 60rpx;
   padding-bottom: 10rpx;
   position: absolute;
+  font-size: 12pt;
+  color: #888888;
+}
+.equipBottomRight{
+  padding-right: 20rpx;
+  padding-top: 60rpx;
+  padding-bottom: 10rpx;
+  position: absolute;
+  right: 20rpx;
   font-size: 12pt;
   color: #888888;
 }
