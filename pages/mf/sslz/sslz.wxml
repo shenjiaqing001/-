@@ -18,7 +18,7 @@
        range="{{equipMutliArray[equipForIndex]}}"  data-idx = "{{equipForIndex}}">
           <view class='equipBox'>
             <text class='equipTopLeft'>{{equipMutliArray[equipForIndex][0][equipMutilIndexArray[equipForIndex][0]]}}</text>
-            <text class='equipTopRight'>{{equipMutliArray[equipForIndex][1]}}</text>
+            <text class='equipTopRight'>{{equipMutliArray[equipForIndex][1][equipMutilIndexArray[equipForIndex][1]]}}</text>
             <text class='equipBottomLeft'>{{equipList[equipForIndex][equipMutilIndexArray[equipForIndex][0]].description}}</text>
             <text class='equipBottomRight'>{{equipList[equipForIndex][equipMutilIndexArray[equipForIndex][0]].from}}</text>
           </view>
