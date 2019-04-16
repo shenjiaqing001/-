@@ -21,11 +21,8 @@
             <text class='equipTopRight'>{{equipMutliArray[equipForIndex][1][equipMutilIndexArray[equipForIndex][1]]}}</text>
             <text class='equipBottomLeft'>{{equipList[equipForIndex][equipMutilIndexArray[equipForIndex][0]].description}}</text>
             <text class='equipBottomRight'>{{equipList[equipForIndex][equipMutilIndexArray[equipForIndex][0]].from}}</text>
-          </view>
-          
+          </view>          
       </picker>
-
-
     </view>
   </view>  
 </view>
@@ -85,6 +82,15 @@
       <text class='viewTitleSemiWord'>{{kanglong}}%会心</text>
     </view>
       <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='kanglongSlider' bindchange='kanglongSlider'>
+      </slider>
+   </view>
+
+   <view class='viewShadow'>
+    <view class='viewTitle'>
+      <text class='viewTitleWord'>兼和</text>
+      <text class='viewTitleSemiWord'>{{jianhe}}%主属性</text>
+    </view>
+      <slider class='sliderClass' min='0' max='4' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='jianheSlider' bindchange='jianheSlider'>
       </slider>
    </view>
 </view>

@@ -7,15 +7,24 @@
   </view>
 </view>
 
-<view hidden="{{currentTab !== 0}}">
-  <view class='viewShadow'>
-    <view class="li"  wx:for="{{equipPlace}}" wx:for-index="equipForIndex">
-      <picker class= "picker" mode="selector" bindchange = "equipPickerChange" value="{{equipIndexArray[equipForIndex]}}" range="{{equipArray[equipForIndex]}}" range-key="nameLong"  data-idx = "{{equipForIndex}}">
-        <text >{{equipPlace[equipForIndex].value}}  </text>
-        <text  class='setcontext' > {{equipArray[equipForIndex][equipIndexArray[equipForIndex]].nameLong}}</text>
+<view style='padding-bottom:50rpx' hidden="{{currentTab !== 0}}">
+  <view wx:for="{{equipPlace}}" wx:for-index="equipForIndex">
+    <view class='viewShadow'>
+      <view class='viewTitle'>
+        <text class='viewTitleWord'>{{equipPlace[equipForIndex].name}}</text>
+      </view>
+      <picker class= "picker" mode="multiSelector" 
+      bindchange = "bindMultiPickerChange"  bindcolumnchange = "bindMultiPickerColumnChange"
+       range="{{equipMutliArray[equipForIndex]}}"  data-idx = "{{equipForIndex}}">
+          <view class='equipBox'>
+            <text class='equipTopLeft'>{{equipMutliArray[equipForIndex][0][equipMutilIndexArray[equipForIndex][0]]}}</text>
+            <text class='equipTopRight'>{{equipMutliArray[equipForIndex][1][equipMutilIndexArray[equipForIndex][1]]}}</text>
+            <text class='equipBottomLeft'>{{equipList[equipForIndex][equipMutilIndexArray[equipForIndex][0]].description}}</text>
+            <text class='equipBottomRight'>{{equipList[equipForIndex][equipMutilIndexArray[equipForIndex][0]].from}}</text>
+          </view>          
       </picker>
     </view>
-  </view>
+  </view>  
 </view>
 
 
@@ -78,16 +87,14 @@
     <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(133,163,213)' block-color='rgb(133,163,213)' block-size='15' bindchanging='kanglongSlider' bindchange='kanglongSlider'>
     </slider>
   </view>
-<!--
   <view class='viewShadow'>
     <view class='viewTitle'>
-      <text class='viewTitleWord'>天枪</text>
-      <text class='viewTitleSemiWord'>{{tianqiang}}%会心效果</text>
+      <text class='viewTitleWord'>兼和</text>
+      <text class='viewTitleSemiWord'>{{jianhe}}%主属性</text>
     </view>
-    <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(133,163,213)' block-color='rgb(133,163,213)' block-size='15' bindchanging='tianqiangSlider' bindchange='tianqiangSlider'>
-    </slider>
-  </view>
-  -->
+      <slider class='sliderClass' min='0' max='4' step='1' show-value='true' activeColor='rgb(133,163,213)' block-color='rgb(133,163,213)' block-size='15' bindchanging='jianheSlider' bindchange='jianheSlider'>
+      </slider>
+   </view>
 </view>
 
 <!--残卷食品-->

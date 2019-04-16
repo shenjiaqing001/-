@@ -4,29 +4,66 @@ Page({
     navbar: ['装备', '附魔/宝石', '星蕴/特技', '附加属性', "属性"],
     winHeight: "",//窗口高度
     currentTab: 0, //预设当前项的值
-    equipArray: [],
     shareImgUrl: [],
+
+    equipList: [],
+    levelList: [],
+    equipMutliArray: [],
+    equipMutilIndexArray: [
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0]
+    ],
+    equipDetail: [
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+      { "法强": 20, "专注": 20 },
+    ],
     equipIndexArray: [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ],
 
     equipIndex: 0,
     equipPlace: [
-      { name: '武器', value: '武器' },
-      { name: '信物左', value: '信物左' },
-      { name: '信物中', value: '信物中' },
-      { name: '信物右', value: '信物右' },
-      { name: '头', value: '头' },
-      { name: '衣服', value: '衣服' },
-      { name: '护腕', value: '护腕' },
-      { name: '腰带', value: '腰带' },
-      { name: '裤', value: '裤' },
-      { name: '鞋', value: '鞋' },
-      { name: '项链', value: '项链' },
-      { name: '配1', value: '配1' },
-      { name: '配2', value: '配2' },
-      { name: '戒指1', value: '戒指1' },
-      { name: '戒指2', value: '戒指2' },
+      { name: '武器' },
+      { name: '信物左' },
+      { name: '信物中' },
+      { name: '信物右' },
+      { name: '头' },
+      { name: '衣服' },
+      { name: '护腕' },
+      { name: '腰带' },
+      { name: '裤' },
+      { name: '鞋' },
+      { name: '项链' },
+      { name: '配1' },
+      { name: '配2' },
+      { name: '戒指1' },
+      { name: '戒指2' },
     ],
     //附魔-------------------------------------------------------------------------------------------------------------------------
     enchantIndex: 0,
@@ -71,7 +108,7 @@ Page({
       { name: '戒指', value: '戒指', show: false },
     ],
     stoneIndexArray: [
-      0, 0, 0, 0, 0, 0, 0, 0, 0,
+      2, 2, 0, 2, 0, 2, 0, 0, 0,
     ],
     stoneArray: [
     ],
@@ -122,6 +159,7 @@ Page({
     huben: 0,
     kanglong: 0,
     tianqiang: 0,
+    jianhe: 0,
 
     zuizhong: 0,
 
@@ -219,6 +257,19 @@ Page({
     if (e.detail.value == 5) num = 10
     this.setData({
       huben: num
+    })
+    this.updatePorperty()
+  },
+
+  jianheSlider: function (e) {
+    var num = 0
+    if (e.detail.value == 0) num = 0
+    if (e.detail.value == 1) num = 1.25
+    if (e.detail.value == 2) num = 2.5
+    if (e.detail.value == 3) num = 5
+    if (e.detail.value == 4) num = 10
+    this.setData({
+      jianhe: num
     })
     this.updatePorperty()
   },
@@ -338,13 +389,22 @@ Page({
       },
     })
 
-    db.collection('equipS').where({
+    db.collection('equipment').where({
       _openid: this.data.openid
     }).get({
       success: res => {
+        var list = []
+        var tempEquipList = res.data[0].equipListSHD
+        for (var index in tempEquipList) {
+          var name = []
+          for (var index2 in tempEquipList[index])
+            name.push(tempEquipList[index][index2].name)
+          list.push([name, tempEquipList[index][0].level.split(";")])
+        }
         this.setData({
-          //enchantArray: res.data[0],
-          equipArray: res.data[0].equipSHDPS,
+          equipList: tempEquipList,
+          levelList: res.data[0].level,
+          equipMutliArray: list,
         })
       },
     })
@@ -354,190 +414,242 @@ Page({
     return Math.round(num * 100) / 100
   },
 
-  updatePorperty: function () {
-    for (var index in this.data.propertyList) {
-      this.data.propertyList[index].value = 0
-      for (var index2 in this.data.equipPlace) {
-        if (this.data.propertyList[index].name == "属性") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].属性 != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].属性 != "")
-            this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].属性
-        }
-        if (this.data.propertyList[index].name == "攻击") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].攻击 != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].攻击 != "")
-            this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].攻击
-        }
-        if (this.data.propertyList[index].name == "会心") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].会心 != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].会心 != "")
-            this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].会心
-        }
-        if (this.data.propertyList[index].name == "专注") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].专注 != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].专注 != "")
-            this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].专注
-        }
-        if (this.data.propertyList[index].name == "急速") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].急速 != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].急速 != "")
-            this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].急速
-        }
-        if (this.data.propertyList[index].name == "强度") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].强度 != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].强度 != "")
-            this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].强度
-        }
-        if (this.data.propertyList[index].name == "专精") {
-          if (this.data.equipArray[index2][this.data.equipIndexArray[index2]].专精 != null && this.data.equipArray[index2][this.data.equipIndexArray[index2]].专精 != "")
-            this.data.propertyList[index].value += this.data.equipArray[index2][this.data.equipIndexArray[index2]].专精
-        }
-      }
+  bindMultiPickerChange: function (e) {
+    const curindex = e.target.dataset.idx
+    var data = {
+      equipMutilIndexArray: this.data.equipMutilIndexArray,
+    };
+    if (e.detail.value[0] == null)
+      e.detail.value[0] = 0
+    if (e.detail.value[1] == null)
+      e.detail.value[1] = 0
+    data.equipMutilIndexArray[curindex] = e.detail.value
+    this.setData(data);
+    this.updatePorperty()
+  },
 
-      for (var index2 in this.data.enchantPlace) {
-        if (this.data.propertyList[index].name == "属性") {
-          if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].属性 != null)
-            this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].属性
+  bindMultiPickerColumnChange: function (e) {
+    const curindex = e.target.dataset.idx
+    var data = {
+      equipMutliArray: this.data.equipMutliArray,
+    };
+    switch (e.detail.column) {
+      case 0:
+        {
+          var levels = this.data.equipList[curindex][e.detail.value].level;
+          data.equipMutliArray[curindex][1] = levels.split(";");
         }
-        if (this.data.propertyList[index].name == "攻击") {
-          if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].攻击 != null)
-            this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].攻击
-        }
-        if (this.data.propertyList[index].name == "会心") {
-          if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].会心 != null)
-            this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].会心
-        }
-        if (this.data.propertyList[index].name == "专注") {
-          if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].专注 != null)
-            this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].专注
-        }
-        if (this.data.propertyList[index].name == "急速") {
-          if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].急速 != null)
-            this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].急速
-        }
-        if (this.data.propertyList[index].name == "强度") {
-          if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].强度 != null)
-            this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].强度
-        }
-        if (this.data.propertyList[index].name == "专精") {
-          if (this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].专精 != null)
-            this.data.propertyList[index].value += this.data.enchantArray[index2][this.data.enchantIndexArray[index2]].专精
-        }
-      }
+        break;
+    }
+    this.setData(data);
+  },
 
-      for (var index2 in this.data.stonePlace) {
-        if (this.data.propertyList[index].name == "属性") {
-          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].属性 != null)
-            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].属性
-        }
-        if (this.data.propertyList[index].name == "攻击") {
-          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].攻击 != null)
-            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].攻击
-        }
-        if (this.data.propertyList[index].name == "会心") {
-          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].会心 != null)
-            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].会心
-        }
-        if (this.data.propertyList[index].name == "专注") {
-          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].专注 != null)
-            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].专注
-        }
-        if (this.data.propertyList[index].name == "急速") {
-          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].急速 != null)
-            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].急速
-        }
-        if (this.data.propertyList[index].name == "强度") {
-          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].强度 != null)
-            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].强度
-        }
-        if (this.data.propertyList[index].name == "专精") {
-          if (this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].专精 != null)
-            this.data.propertyList[index].value += this.data.stoneArray[index2][this.data.stoneIndexArray[index2]].专精
-        }
-      }
-
-      for (var index2 in this.data.foodPlace) {
-        if (this.data.propertyList[index].name == "属性") {
-          if (this.data.foodArray[index2][this.data.foodIndexArray[index2]].属性 != null)
-            this.data.propertyList[index].value += this.data.foodArray[index2][this.data.foodIndexArray[index2]].属性
-        }
-        if (this.data.propertyList[index].name == "攻击") {
-          if (this.data.foodArray[index2][this.data.foodIndexArray[index2]].攻击 != null)
-            this.data.propertyList[index].value += this.data.foodArray[index2][this.data.foodIndexArray[index2]].攻击
-        }
-        if (this.data.propertyList[index].name == "会心") {
-          if (this.data.foodArray[index2][this.data.foodIndexArray[index2]].会心 != null)
-            this.data.propertyList[index].value += this.data.foodArray[index2][this.data.foodIndexArray[index2]].会心
-        }
-        if (this.data.propertyList[index].name == "专注") {
-          if (this.data.foodArray[index2][this.data.foodIndexArray[index2]].专注 != null)
-            this.data.propertyList[index].value += this.data.foodArray[index2][this.data.foodIndexArray[index2]].专注
-        }
-        if (this.data.propertyList[index].name == "急速") {
-          if (this.data.foodArray[index2][this.data.foodIndexArray[index2]].急速 != null)
-            this.data.propertyList[index].value += this.data.foodArray[index2][this.data.foodIndexArray[index2]].急速
-        }
-        if (this.data.propertyList[index].name == "强度") {
-          if (this.data.foodArray[index2][this.data.foodIndexArray[index2]].强度 != null)
-            this.data.propertyList[index].value += this.data.foodArray[index2][this.data.foodIndexArray[index2]].强度
-        }
-        if (this.data.propertyList[index].name == "专精") {
-          if (this.data.foodArray[index2][this.data.foodIndexArray[index2]].专精 != null)
-            this.data.propertyList[index].value += this.data.foodArray[index2][this.data.foodIndexArray[index2]].专精
-        }
-      }
-
-      for (var index2 in this.data.starArray)
-        if (this.data.propertyList[index].name == this.data.starArray[index2].name) {
-          if (this.data.starArray[index2].value != null) {
-            if (!isNaN(this.data.starArray[index2].value))
-              this.data.propertyList[index].value += this.data.starArray[index2].value
-          }
-        }
+  getLevelDetail: function (index, level) {
+    var data = {
+      levelList: this.data.levelList
     }
 
-    this.data.propertyList[this.data.攻击].value += this.data.propertyList[this.data.属性].value * 0.3
-    this.data.propertyList[this.data.会心].value += this.data.propertyList[this.data.属性].value * 0.5
-    this.data.propertyList[this.data.强度].value += this.data.propertyList[this.data.属性].value * 0.7
-    this.data.propertyList[this.data.强度].value += 28
-    this.data.propertyList[this.data.会心].value += 20
-    this.data.propertyList[this.data.攻击].value = this.data.propertyList[this.data.攻击].value * 1.2
+    switch (level) {
+      case "65":
+        return data.levelList[index].level65;
+        break;
+      case "75":
+        return data.levelList[index].level75;
+        break;
+      case "80":
+        return data.levelList[index].level80;
+        break;
+      case "90":
+        return data.levelList[index].level90;
+        break;
+      case "95":
+        return data.levelList[index].level95;
+        break;
+      case "100":
+        return data.levelList[index].level100;
+        break;
+      case "105":
+        return data.levelList[index].level105;
+        break;
+      case "110":
+        return data.levelList[index].level110;
+        break;
+      case "115":
+        return data.levelList[index].level115;
+        break;
+      case "120":
+        return data.levelList[index].level120;
+        break;
+      case "125":
+        return data.levelList[index].level125;
+        break;
+      case "130":
+        return data.levelList[index].level130;
+        break;
+      case "135":
+        return data.levelList[index].level135;
+        break;
+    }
+  },
 
-    //加面板属性
-    this.data.propertyList[this.data.属性].value += 40
-    this.data.propertyList[this.data.攻击].value += 32
-    this.data.propertyList[this.data.专注].value += 14
+  updatePorperty: function () {
+    var data = {
+      propertyList: this.data.propertyList,
+      zuizhong: this.data.zuizhong,
+      equipMutilIndexArray: this.data.equipMutilIndexArray,
+      equipList: this.data.equipList,
+      enchantArray: this.data.enchantArray,
+      enchantIndexArray: this.data.enchantIndexArray,
+      stoneArray: this.data.stoneArray,
+      stoneIndexArray: this.data.stoneIndexArray,
+      foodArray: this.data.foodArray,
+      foodIndexArray: this.data.foodIndexArray,
+      starArray: this.data.starArray,
+    };
+    for (var i = 0; i < data.propertyList.length; ++i) {
+      data.propertyList[i].value = 0;
+    }
+    for (var i = 0; i < data.equipMutilIndexArray.length; ++i) {
+      var equipDetail = data.equipList[i][data.equipMutilIndexArray[i][0]].detail.split(';')
+      var level = data.equipList[i][data.equipMutilIndexArray[i][0]].level.split(';')[data.equipMutilIndexArray[i][1]]
+      var levelDetail = this.getLevelDetail(i, level).split(';')
+
+      for (var j = 0; j < equipDetail.length; ++j) {
+        if (equipDetail[j] == "攻击")
+          data.propertyList[this.data.攻击].value += parseFloat(levelDetail[j])
+        if (equipDetail[j] == "属性")
+          data.propertyList[this.data.属性].value += parseFloat(levelDetail[j])
+        if (equipDetail[j] == "专注")
+          data.propertyList[this.data.专注].value += parseFloat(levelDetail[j])
+        if (equipDetail[j] == "专精")
+          data.propertyList[this.data.专精].value += parseFloat(levelDetail[j])
+        if (equipDetail[j] == "急速")
+          data.propertyList[this.data.急速].value += parseFloat(levelDetail[j])
+        if (equipDetail[j] == "会心")
+          data.propertyList[this.data.会心].value += parseFloat(levelDetail[j])
+        if (equipDetail[j] == "强度")
+          data.propertyList[this.data.强度].value += parseFloat(levelDetail[j])
+      }
+    }
+
+    for (var i = 0; i < data.enchantArray.length; ++i) {
+      if (data.enchantArray[i][data.enchantIndexArray[i]].属性 != null)
+        data.propertyList[this.data.属性].value += data.enchantArray[i][data.enchantIndexArray[i]].属性
+      if (data.enchantArray[i][data.enchantIndexArray[i]].攻击 != null)
+        data.propertyList[this.data.攻击].value += data.enchantArray[i][data.enchantIndexArray[i]].攻击
+      if (data.enchantArray[i][data.enchantIndexArray[i]].会心 != null)
+        data.propertyList[this.data.会心].value += data.enchantArray[i][data.enchantIndexArray[i]].会心
+      if (data.enchantArray[i][data.enchantIndexArray[i]].专注 != null)
+        data.propertyList[this.data.专注].value += data.enchantArray[i][data.enchantIndexArray[i]].专注
+      if (data.enchantArray[i][data.enchantIndexArray[i]].急速 != null)
+        data.propertyList[this.data.急速].value += data.enchantArray[i][data.enchantIndexArray[i]].急速
+      if (data.enchantArray[i][data.enchantIndexArray[i]].强度 != null)
+        data.propertyList[this.data.强度].value += data.enchantArray[i][data.enchantIndexArray[i]].强度
+      if (data.enchantArray[i][data.enchantIndexArray[i]].专精 != null)
+        data.propertyList[this.data.专精].value += data.enchantArray[i][data.enchantIndexArray[i]].专精
+    }
+
+    for (var i = 0; i < data.foodArray.length; ++i) {
+      if (data.foodArray[i][data.foodIndexArray[i]].属性 != null)
+        data.propertyList[this.data.属性].value += data.foodArray[i][data.foodIndexArray[i]].属性
+      if (data.foodArray[i][data.foodIndexArray[i]].攻击 != null)
+        data.propertyList[this.data.攻击].value += data.foodArray[i][data.foodIndexArray[i]].攻击
+      if (data.foodArray[i][data.foodIndexArray[i]].会心 != null)
+        data.propertyList[this.data.会心].value += data.foodArray[i][data.foodIndexArray[i]].会心
+      if (data.foodArray[i][data.foodIndexArray[i]].专注 != null)
+        data.propertyList[this.data.专注].value += data.foodArray[i][data.foodIndexArray[i]].专注
+      if (data.foodArray[i][data.foodIndexArray[i]].急速 != null)
+        data.propertyList[this.data.急速].value += data.foodArray[i][data.foodIndexArray[i]].急速
+      if (data.foodArray[i][data.foodIndexArray[i]].强度 != null)
+        data.propertyList[this.data.强度].value += data.foodArray[i][data.foodIndexArray[i]].强度
+      if (data.foodArray[i][data.foodIndexArray[i]].专精 != null)
+        data.propertyList[this.data.专精].value += data.foodArray[i][data.foodIndexArray[i]].专精
+    }
+
+    for (var i = 0; i < data.stoneArray.length; ++i) {
+      if (data.stoneArray[i][data.stoneIndexArray[i]].属性 != null)
+        data.propertyList[this.data.属性].value += data.stoneArray[i][data.stoneIndexArray[i]].属性
+      if (data.stoneArray[i][data.stoneIndexArray[i]].攻击 != null)
+        data.propertyList[this.data.攻击].value += data.stoneArray[i][data.stoneIndexArray[i]].攻击
+      if (data.stoneArray[i][data.stoneIndexArray[i]].会心 != null)
+        data.propertyList[this.data.会心].value += data.stoneArray[i][data.stoneIndexArray[i]].会心
+      if (data.stoneArray[i][data.stoneIndexArray[i]].专注 != null)
+        data.propertyList[this.data.专注].value += data.stoneArray[i][data.stoneIndexArray[i]].专注
+      if (data.stoneArray[i][data.stoneIndexArray[i]].急速 != null)
+        data.propertyList[this.data.急速].value += data.stoneArray[i][data.stoneIndexArray[i]].急速
+      if (data.stoneArray[i][data.stoneIndexArray[i]].强度 != null)
+        data.propertyList[this.data.强度].value += data.stoneArray[i][data.stoneIndexArray[i]].强度
+      if (data.stoneArray[i][data.stoneIndexArray[i]].专精 != null)
+        data.propertyList[this.data.专精].value += data.stoneArray[i][data.stoneIndexArray[i]].专精
+    }
+
+    for (var i = 0; i < data.starArray.length; ++i) {
+      if (data.starArray[i].name == "属性")
+        data.propertyList[this.data.属性].value += data.starArray[i].value
+      if (data.starArray[i].name == "攻击")
+        data.propertyList[this.data.攻击].value += data.starArray[i].value
+      if (data.starArray[i].name == "会心")
+        data.propertyList[this.data.会心].value += data.starArray[i].value
+      if (data.starArray[i].name == "专注")
+        data.propertyList[this.data.专注].value += data.starArray[i].value
+      if (data.starArray[i].name == "急速")
+        data.propertyList[this.data.急速].value += data.starArray[i].value
+      if (data.starArray[i].name == "强度")
+        data.propertyList[this.data.强度].value += data.starArray[i].value
+      if (data.starArray[i].name == "专精")
+        data.propertyList[this.data.专精].value += data.starArray[i].value
+    }
+
+    data.propertyList[this.data.攻击].value += data.propertyList[this.data.属性].value * 0.3
+    data.propertyList[this.data.会心].value += data.propertyList[this.data.属性].value * 0.5
+    data.propertyList[this.data.强度].value += data.propertyList[this.data.属性].value * 0.7
+    data.propertyList[this.data.属性].value += 40
+    data.propertyList[this.data.强度].value += 28
+    data.propertyList[this.data.会心].value += 20
+    data.propertyList[this.data.专注].value += 14
+    data.propertyList[this.data.攻击].value = data.propertyList[this.data.攻击].value * 1.2
+    data.propertyList[this.data.攻击].value += 32
+
+    var num = this.data.jianhe * data.propertyList[this.data.属性].value / 100
+    data.propertyList[this.data.攻击].value += num * 0.3 * 1.2
+    data.propertyList[this.data.会心].value += num * 0.5 
+    data.propertyList[this.data.强度].value += num * 0.7
+
 
     //计算百分比
-    this.data.propertyList[this.data.属性].percent = this.data.propertyList[this.data.属性].value
-    this.data.propertyList[this.data.攻击].percent = this.data.propertyList[this.data.攻击].value
-    this.data.propertyList[this.data.专精].percent = this.data.propertyList[this.data.专精].value
-    this.data.propertyList[this.data.会心].percent = this.data.propertyList[this.data.会心].value * 0.075 + this.data.kanglong
-    this.data.propertyList[this.data.专注].percent = this.data.propertyList[this.data.专注].value * 0.06 + 80 + this.data.huben
-    this.data.propertyList[this.data.强度].percent = this.data.propertyList[this.data.强度].value
-    this.data.propertyList[this.data.急速].percent = this.data.propertyList[this.data.急速].value / 12
+    data.propertyList[this.data.属性].percent = data.propertyList[this.data.属性].value + num
+    data.propertyList[this.data.攻击].percent = data.propertyList[this.data.攻击].value
+    data.propertyList[this.data.专精].percent = data.propertyList[this.data.专精].value
+    data.propertyList[this.data.会心].percent = data.propertyList[this.data.会心].value * 0.075 + this.data.kanglong
+    data.propertyList[this.data.专注].percent = data.propertyList[this.data.专注].value * 0.06 + 80 + this.data.huben
+    data.propertyList[this.data.强度].percent = data.propertyList[this.data.强度].value
+    data.propertyList[this.data.急速].percent = data.propertyList[this.data.急速].value / 12
 
     //血露薇
-    if (this.data.xlwBuff == 0) this.data.propertyList[this.data.会心].percent += 1
-    else if (this.data.xlwBuff == 1) this.data.propertyList[this.data.专注].percent += 1
-    else if (this.data.xlwBuff == 2) this.data.propertyList[this.data.强度].percent += 10
-    else if (this.data.xlwBuff == 3) this.data.propertyList[this.data.急速].percent += 1
+    if (this.data.xlwBuff == 0) data.propertyList[this.data.会心].percent += 1
+    else if (this.data.xlwBuff == 1) data.propertyList[this.data.专注].percent += 1
+    else if (this.data.xlwBuff == 2) data.propertyList[this.data.强度].percent += 10
+    else if (this.data.xlwBuff == 3) data.propertyList[this.data.急速].percent += 1
 
     //挚友
     if (this.data.zhiyouList.indexOf("0") != -1) {
-      this.data.propertyList[this.data.会心].percent += 1
+      data.propertyList[this.data.会心].percent += 1
     }
     if (this.data.zhiyouList.indexOf("1") != -1) {
-      this.data.propertyList[this.data.专精].percent += 10
+      data.propertyList[this.data.专精].percent += 10
     }
     if (this.data.zhiyouList.indexOf("2") != -1) {
-      this.data.propertyList[this.data.强度].percent += 10
+      data.propertyList[this.data.强度].percent += 10
     }
 
     for (var index in this.data.propertyList) {
-      this.data.propertyList[index].value = this.getDecimal(this.data.propertyList[index].value)
-      this.data.propertyList[index].percent = this.getDecimal(this.data.propertyList[index].percent)
+      data.propertyList[index].value = this.getDecimal(data.propertyList[index].value)
+      data.propertyList[index].percent = this.getDecimal(data.propertyList[index].percent)
     }
 
-    this.data.zuizhong = this.getDecimal(this.data.propertyList[this.data.攻击].value * (1 + this.data.propertyList[this.data.强度].percent / 1000))
-    this.setData({
-      propertyList: this.data.propertyList,
-      zuizhong: this.data.zuizhong,
-    })
+    data.zuizhong = this.getDecimal(data.propertyList[this.data.攻击].value * (1 + data.propertyList[this.data.强度].percent / 1000))
+
+    this.setData(data);
   },
 
   drawCanvas: function () {
@@ -586,34 +698,40 @@ Page({
 
       //装备
       ctx.setFontSize(18)
-      for (var i = 0; i < this.data.equipArray.length; i++) {
-        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameShort, 40, 27 * i + 80)
+      for (var i = 0; i < this.data.equipList.length; i++) {
+        ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].name, 40, 27 * i + 80)
       }
       ctx.setFontSize(8)
       ctx.setFillStyle('#666666')
-      for (var i = 0; i < this.data.equipArray.length; i++) {
-        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameLong, 40, 27 * i + 90)
+      for (var i = 0; i < this.data.equipList.length; i++) {
+        ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].description, 40, 27 * i + 90)
+      }
+      ctx.setFontSize(12)
+      for (var i = 0; i < this.data.equipList.length; i++) {
+        ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].from, 200, 27 * i + 88)
+      }
+      for (var i = 0; i < this.data.levelList.length; i++) {
+        ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].level.split(';')[this.data.equipMutilIndexArray[i][1]], 280, 27 * i + 88)
       }
       //附魔宝石
       ctx.setFontSize(12)
-      ctx.fillText(this.data.stoneArray[0][this.data.stoneIndexArray[0]].nameShort, 200, 27 * 1 + 80)
-      ctx.fillText(this.data.stoneArray[1][this.data.stoneIndexArray[1]].nameShort, 280, 27 * 1 + 80)
-      ctx.fillText(this.data.stoneArray[2][this.data.stoneIndexArray[2]].nameShort, 200, 27 * 2 + 80)
-      ctx.fillText(this.data.stoneArray[3][this.data.stoneIndexArray[3]].nameShort, 280, 27 * 2 + 80)
-      ctx.fillText(this.data.stoneArray[4][this.data.stoneIndexArray[4]].nameShort, 200, 27 * 3 + 80)
-      ctx.fillText(this.data.stoneArray[5][this.data.stoneIndexArray[5]].nameShort, 280, 27 * 3 + 80)
-      ctx.fillText(this.data.stoneArray[6][this.data.stoneIndexArray[6]].nameShort, 200, 27 * 10 + 80)
-      ctx.fillText(this.data.stoneArray[7][this.data.stoneIndexArray[7]].nameShort, 200, 27 * 13 + 80)
-      ctx.fillText(this.data.stoneArray[8][this.data.stoneIndexArray[8]].nameShort, 200, 27 * 14 + 80)
+      ctx.fillText(this.data.stoneArray[0][this.data.stoneIndexArray[0]].nameShort, 200, 27 * 1 + 76)
+      ctx.fillText(this.data.stoneArray[1][this.data.stoneIndexArray[1]].nameShort, 280, 27 * 1 + 76)
+      ctx.fillText(this.data.stoneArray[2][this.data.stoneIndexArray[2]].nameShort, 200, 27 * 2 + 76)
+      ctx.fillText(this.data.stoneArray[3][this.data.stoneIndexArray[3]].nameShort, 280, 27 * 2 + 76)
+      ctx.fillText(this.data.stoneArray[4][this.data.stoneIndexArray[4]].nameShort, 200, 27 * 3 + 76)
+      ctx.fillText(this.data.stoneArray[5][this.data.stoneIndexArray[5]].nameShort, 280, 27 * 3 + 76)
+      ctx.fillText(this.data.stoneArray[6][this.data.stoneIndexArray[6]].nameShort, 200, 27 * 10 + 76)
+      ctx.fillText(this.data.stoneArray[7][this.data.stoneIndexArray[7]].nameShort, 200, 27 * 13 + 76)
+      ctx.fillText(this.data.stoneArray[8][this.data.stoneIndexArray[8]].nameShort, 200, 27 * 14 + 76)
 
-      ctx.fillText(this.data.enchantArray[0][this.data.enchantIndexArray[0]].name, 200, 27 * 0 + 80)
-      ctx.fillText(this.data.enchantArray[1][this.data.enchantIndexArray[1]].name, 200, 27 * 4 + 80)
-      ctx.fillText(this.data.enchantArray[2][this.data.enchantIndexArray[2]].name, 200, 27 * 5 + 80)
-      ctx.fillText(this.data.enchantArray[3][this.data.enchantIndexArray[3]].name, 200, 27 * 6 + 80)
-      ctx.fillText(this.data.enchantArray[4][this.data.enchantIndexArray[4]].name, 200, 27 * 7 + 80)
-      ctx.fillText(this.data.enchantArray[5][this.data.enchantIndexArray[5]].name, 200, 27 * 8 + 80)
-      ctx.fillText(this.data.enchantArray[6][this.data.enchantIndexArray[6]].name, 200, 27 * 9 + 80)
-
+      ctx.fillText(this.data.enchantArray[0][this.data.enchantIndexArray[0]].name, 200, 27 * 0 + 76)
+      ctx.fillText(this.data.enchantArray[1][this.data.enchantIndexArray[1]].name, 200, 27 * 4 + 76)
+      ctx.fillText(this.data.enchantArray[2][this.data.enchantIndexArray[2]].name, 200, 27 * 5 + 76)
+      ctx.fillText(this.data.enchantArray[3][this.data.enchantIndexArray[3]].name, 200, 27 * 6 + 76)
+      ctx.fillText(this.data.enchantArray[4][this.data.enchantIndexArray[4]].name, 200, 27 * 7 + 76)
+      ctx.fillText(this.data.enchantArray[5][this.data.enchantIndexArray[5]].name, 200, 27 * 8 + 76)
+      ctx.fillText(this.data.enchantArray[6][this.data.enchantIndexArray[6]].name, 200, 27 * 9 + 76)
       //星蕴
       ctx.setFontSize(24)
       ctx.setFillStyle('black')
@@ -642,6 +760,8 @@ Page({
         strList.push("虎贲" + this.data.huben + '%命中')
       if (this.data.kanglong != 0)
         strList.push("亢行" + this.data.kanglong + '%会心')
+      if (this.data.jianhe != 0)
+        strList.push("兼和" + this.data.jianhe + '%主属性')
       if (this.data.xlwBuff == 0) strList.push('血露薇1%会心')
       else if (this.data.xlwBuff == 1) strList.push('血露薇1%专注')
       else if (this.data.xlwBuff == 2) strList.push('血露薇1%强度')

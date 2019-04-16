@@ -159,6 +159,7 @@ Page({
     huben: 0,
     kanglong: 0,
     tianqiang: 0,
+    jianhe: 0,
 
     zuizhong: 0,
 
@@ -247,6 +248,20 @@ Page({
     })
     this.updatePorperty()
   },
+
+  jianheSlider: function (e) {
+    var num = 0
+    if (e.detail.value == 0) num = 0
+    if (e.detail.value == 1) num = 1.25
+    if (e.detail.value == 2) num = 2.5
+    if (e.detail.value == 3) num = 5
+    if (e.detail.value == 4) num = 10
+    this.setData({
+      jianhe: num
+    })
+    this.updatePorperty()
+  },
+
 
   tianqiangSlider: function (e) {
     var num = 0
@@ -413,10 +428,6 @@ Page({
     this.setData(data);
   },
 
-  getDecimal: function (num) {
-    return Math.round(num * 100) / 100
-  },
-
   getLevelDetail: function (index, level) {
     var data = {
       levelList: this.data.levelList
@@ -424,7 +435,7 @@ Page({
 
     switch (level) {
       case "65":
-          return data.levelList[index].level65;
+        return data.levelList[index].level65;
         break;
       case "75":
         return data.levelList[index].level75;
@@ -464,6 +475,10 @@ Page({
         break;
     }
   },
+
+  getDecimal: function (num) {
+    return Math.round(num * 100) / 100
+  },  
 
   updatePorperty: function () {
     var data = {
@@ -573,22 +588,24 @@ Page({
         data.propertyList[this.data.专精].value += data.starArray[i].value
     }
     
-    console.log(data.propertyList)
-    
     data.propertyList[this.data.攻击].value += data.propertyList[this.data.属性].value * 0.3
     data.propertyList[this.data.会心].value += data.propertyList[this.data.属性].value * 0.5
     data.propertyList[this.data.强度].value += data.propertyList[this.data.属性].value * 0.7
+    data.propertyList[this.data.属性].value += 40
     data.propertyList[this.data.强度].value += 28
     data.propertyList[this.data.会心].value += 20
-    data.propertyList[this.data.攻击].value = data.propertyList[this.data.攻击].value * 1.2
-
-    //加面板属性
-    data.propertyList[this.data.属性].value += 40
-    data.propertyList[this.data.攻击].value += 32
     data.propertyList[this.data.专注].value += 14
+    data.propertyList[this.data.攻击].value = data.propertyList[this.data.攻击].value * 1.2
+    data.propertyList[this.data.攻击].value += 32
+
+    var num = this.data.jianhe * data.propertyList[this.data.属性].value / 100
+    data.propertyList[this.data.攻击].value += num * 0.3 * 1.2
+    data.propertyList[this.data.会心].value += num * 0.5 
+    data.propertyList[this.data.强度].value += num * 0.7
+
 
     //计算百分比
-    data.propertyList[this.data.属性].percent = data.propertyList[this.data.属性].value
+    data.propertyList[this.data.属性].percent = data.propertyList[this.data.属性].value + num
     data.propertyList[this.data.攻击].percent = data.propertyList[this.data.攻击].value
     data.propertyList[this.data.专精].percent = data.propertyList[this.data.专精].value
     data.propertyList[this.data.会心].percent = data.propertyList[this.data.会心].value * 0.075 + this.data.kanglong
@@ -621,7 +638,6 @@ Page({
     data.zuizhong = this.getDecimal(data.propertyList[this.data.攻击].value * (1 + data.propertyList[this.data.强度].percent / 1000))
 
     this.setData(data);
-
   },
 
   drawCanvas: function () {    
@@ -678,29 +694,32 @@ Page({
       for (var i = 0; i < this.data.equipList.length; i++) {
         ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].description, 40, 27 * i + 90)
       }
-
+      ctx.setFontSize(12)
       for (var i = 0; i < this.data.equipList.length; i++) {
-        ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].from, 140, 27 * i + 90)
+        ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].from, 200, 27 * i + 88)
+      }
+      for (var i = 0; i < this.data.levelList.length; i++) {
+        ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].level.split(';')[this.data.equipMutilIndexArray[i][1]], 280, 27 * i + 88)
       }
       //附魔宝石
       ctx.setFontSize(12)
-      ctx.fillText(this.data.stoneArray[0][this.data.stoneIndexArray[0]].nameShort, 200, 27 * 1 + 80)
-      ctx.fillText(this.data.stoneArray[1][this.data.stoneIndexArray[1]].nameShort, 280, 27 * 1 + 80)
-      ctx.fillText(this.data.stoneArray[2][this.data.stoneIndexArray[2]].nameShort, 200, 27 * 2 + 80)
-      ctx.fillText(this.data.stoneArray[3][this.data.stoneIndexArray[3]].nameShort, 280, 27 * 2 + 80)
-      ctx.fillText(this.data.stoneArray[4][this.data.stoneIndexArray[4]].nameShort, 200, 27 * 3 + 80)
-      ctx.fillText(this.data.stoneArray[5][this.data.stoneIndexArray[5]].nameShort, 280, 27 * 3 + 80)
-      ctx.fillText(this.data.stoneArray[6][this.data.stoneIndexArray[6]].nameShort, 200, 27 * 10 + 80)
-      ctx.fillText(this.data.stoneArray[7][this.data.stoneIndexArray[7]].nameShort, 200, 27 * 13 + 80)
-      ctx.fillText(this.data.stoneArray[8][this.data.stoneIndexArray[8]].nameShort, 200, 27 * 14 + 80)
+      ctx.fillText(this.data.stoneArray[0][this.data.stoneIndexArray[0]].nameShort, 200, 27 * 1 + 76)
+      ctx.fillText(this.data.stoneArray[1][this.data.stoneIndexArray[1]].nameShort, 280, 27 * 1 + 76)
+      ctx.fillText(this.data.stoneArray[2][this.data.stoneIndexArray[2]].nameShort, 200, 27 * 2 + 76)
+      ctx.fillText(this.data.stoneArray[3][this.data.stoneIndexArray[3]].nameShort, 280, 27 * 2 + 76)
+      ctx.fillText(this.data.stoneArray[4][this.data.stoneIndexArray[4]].nameShort, 200, 27 * 3 + 76)
+      ctx.fillText(this.data.stoneArray[5][this.data.stoneIndexArray[5]].nameShort, 280, 27 * 3 + 76)
+      ctx.fillText(this.data.stoneArray[6][this.data.stoneIndexArray[6]].nameShort, 200, 27 * 10 + 76)
+      ctx.fillText(this.data.stoneArray[7][this.data.stoneIndexArray[7]].nameShort, 200, 27 * 13 + 76)
+      ctx.fillText(this.data.stoneArray[8][this.data.stoneIndexArray[8]].nameShort, 200, 27 * 14 + 76)
 
-      ctx.fillText(this.data.enchantArray[0][this.data.enchantIndexArray[0]].name, 200, 27 * 0 + 80)
-      ctx.fillText(this.data.enchantArray[1][this.data.enchantIndexArray[1]].name, 200, 27 * 4 + 80)
-      ctx.fillText(this.data.enchantArray[2][this.data.enchantIndexArray[2]].name, 200, 27 * 5 + 80)
-      ctx.fillText(this.data.enchantArray[3][this.data.enchantIndexArray[3]].name, 200, 27 * 6 + 80)
-      ctx.fillText(this.data.enchantArray[4][this.data.enchantIndexArray[4]].name, 200, 27 * 7 + 80)
-      ctx.fillText(this.data.enchantArray[5][this.data.enchantIndexArray[5]].name, 200, 27 * 8 + 80)
-      ctx.fillText(this.data.enchantArray[6][this.data.enchantIndexArray[6]].name, 200, 27 * 9 + 80)
+      ctx.fillText(this.data.enchantArray[0][this.data.enchantIndexArray[0]].name, 200, 27 * 0 + 76)
+      ctx.fillText(this.data.enchantArray[1][this.data.enchantIndexArray[1]].name, 200, 27 * 4 + 76)
+      ctx.fillText(this.data.enchantArray[2][this.data.enchantIndexArray[2]].name, 200, 27 * 5 + 76)
+      ctx.fillText(this.data.enchantArray[3][this.data.enchantIndexArray[3]].name, 200, 27 * 6 + 76)
+      ctx.fillText(this.data.enchantArray[4][this.data.enchantIndexArray[4]].name, 200, 27 * 7 + 76)
+      ctx.fillText(this.data.enchantArray[5][this.data.enchantIndexArray[5]].name, 200, 27 * 8 + 76)
+      ctx.fillText(this.data.enchantArray[6][this.data.enchantIndexArray[6]].name, 200, 27 * 9 + 76)
   
       //星蕴
       ctx.setFontSize(24)
@@ -730,6 +749,8 @@ Page({
         strList.push("虎贲" + this.data.huben + '%命中')
       if (this.data.kanglong != 0)
         strList.push("亢行" + this.data.kanglong + '%会心')
+      if (this.data.jianhe != 0)
+        strList.push("兼和" + this.data.jianhe + '%主属性')
       if (this.data.xlwBuff == 0) strList.push('血露薇1%会心')
       else if (this.data.xlwBuff == 1) strList.push('血露薇1%专注')
       else if (this.data.xlwBuff == 2) strList.push('血露薇1%强度')
