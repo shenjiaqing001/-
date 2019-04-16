@@ -670,13 +670,17 @@ Page({
 
       //装备
       ctx.setFontSize(18)
-      for (var i = 0; i < this.data.equipArray.length; i++) {
-        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameShort, 40, 27 * i + 80)
+      for (var i = 0; i < this.data.equipList.length; i++) {
+        ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].name, 40, 27 * i + 80)
       }
       ctx.setFontSize(8)
       ctx.setFillStyle('#666666')
-      for (var i = 0; i < this.data.equipArray.length; i++) {
-        ctx.fillText(this.data.equipArray[i][this.data.equipIndexArray[i]].nameLong, 40, 27 * i + 90)
+      for (var i = 0; i < this.data.equipList.length; i++) {
+        ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].description, 40, 27 * i + 90)
+      }
+
+      for (var i = 0; i < this.data.equipList.length; i++) {
+        ctx.fillText(this.data.equipList[i][this.data.equipMutilIndexArray[i][0]].from, 140, 27 * i + 90)
       }
       //附魔宝石
       ctx.setFontSize(12)

@@ -88,6 +88,8 @@
       </slider>
    </view>
 </view>
+
+
 <!--残卷食品-->
 <view hidden="{{currentTab !== 3}}">
   <!--挚友-->
