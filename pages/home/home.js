@@ -31,8 +31,8 @@ Page({
     }).get({
       success: res => {
         console.log(res.data[0].notice)
-        this.setData({          
-          showCanvas:false,
+        this.setData({
+          showCanvas:true,
           notice: res.data[0].notice,
         })
       },

@@ -1,17 +1,17 @@
 <!--pages/home.wxml-->
 <view class='contentAll'>
   <view class='contentView1'>
-      <view class='LineColor1'>
-          <image src='../../image/tg_title.png' style='width:50%;height:100%'></image>
-      </view>
+    <view class='LineColor1'>
+      <image src='../../image/tg_title.png' style='width:50%;height:100%'></image>
+    </view>
     <button class="button:color1" bindtap = "NavigatorToLCFJ">龙城飞将</button>
     <button disabled='true' class="button:color1" bindtap = "NavigatorToWarrior">玄武护身</button>
   </view>
- 
-  
+
+
   <view class="contentView2">
     <view class='LineColor2'>
-        <image src='../../image/zf_title.png' style='width:50%;height:100%'></image>
+      <image src='../../image/zf_title.png' style='width:50%;height:100%'></image>
     </view>
     <button class="button:color2" bindtap = "NavigatorToDJJW">弹铗九问</button>
     <button disabled='true' class="button:color2" bindtap = "NavigatorToWarrior">酩酊诀</button>
@@ -19,7 +19,7 @@
 
   <view class="contentView3">
     <view class='LineColor3'>
-        <image src='../../image/yj_title.png' style='width:50%;height:100%'></image>
+      <image src='../../image/yj_title.png' style='width:50%;height:100%'></image>
     </view>
     <button class="button:color3" bindtap = "NavigatorToSHJ">神虹诀</button>
     <button class="button:color3" bindtap = "NavigatorToFXP">飞星篇</button>
@@ -27,7 +27,7 @@
 
   <view class="contentView4">
     <view class='LineColor4'>
-        <image src='../../image/mf_title.png' style='width:50%;height:100%'></image>
+      <image src='../../image/mf_title.png' style='width:50%;height:100%'></image>
     </view>
     <button class="button:color4" bindtap = "NavigatorToSSLZ">三十六章</button>
     <button class="button:color4" bindtap = "NavigatorToDYS">洞渊书</button>
@@ -35,15 +35,15 @@
 
   <view class="contentView5">
     <view class='LineColor5'>
-        <image src='../../image/sm_title.png' style='width:50%;height:100%'></image>
+      <image src='../../image/sm_title.png' style='width:50%;height:100%'></image>
     </view>
     <button class="button:color5"   bindtap = "NavigatorToHLZ">唤灵咒</button>
     <button class="button:color5"   bindtap = "NavigatorToWSZYZ">娲圣祝由咒</button>
-   </view>
+  </view>
 
   <view class="contentView6">
     <view class='LineColor6'>
-        <image src='../../image/zy_title.png' style='width:50%;height:100%'></image>
+      <image src='../../image/zy_title.png' style='width:50%;height:100%'></image>
     </view>
     <button class="button:color6"   bindtap = "NavigatorToQMGZ">窃冥蛊咒</button>
     <button class="button:color6"   bindtap = "NavigatorToSYXJ">圣佑血祭</button>
@@ -57,11 +57,11 @@
     <view class='modal-btn-wrapper-top'>
     </view>
     <text style='color:#353535;text-align:left;margin-left: 10px;margin-right: 10px;'>     {{notice}}</text>
-    <view class='modal-btn-wrapper-bottom'>      
+    <view class='modal-btn-wrapper-bottom'>
       <view class='confirm-btn' style='color:#1AAD19' bindtap='ok'>我知道了</view>
     </view>
   </view>
   <view class="mask" catchtouchmove="preventTouchMove" hidden="{{showCanvas}}"></view>
- 
+
 </view>
 

@@ -95,27 +95,35 @@ button[disabled]:not([type]) {
 
 .color1 {
   background-color: white; 
-	color: rgb(192, 109, 99); 
+	color: rgb(108, 35, 34); 
 }
 .color2 {
   background-color: white; 
-	color: rgb(137,162,123); 
+	color: rgb(113,114,82); 
 }
 .color3 {
   background-color: white; 
-	color: rgb(133,163,213); 
+	color: rgb(110,142,181); 
 }
 .color4 {
   background-color: white; 
-	color: rgb(228,194,131); 
+	color: rgb(192,153,112); 
 }
 .color5 {
   background-color: white; 
-	color: rgb(110,157,180); 
+	color: rgb(123,180,195); 
 }
 .color6 {
 	background-color: white; 
-	color: rgb(144,136,179);
+	color: rgb(149,128,178);
+}
+.color7{
+  background-color: white; 
+	color: rgb(238,160,173);
+}
+.color8{
+  background-color: white; 
+	color: rgb(40,52,104);
 }
 
 .bottomText{

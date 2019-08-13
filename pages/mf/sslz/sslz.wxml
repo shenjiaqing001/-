@@ -8,59 +8,68 @@
 </view>
 
 <view style='padding-bottom:50rpx' hidden="{{currentTab !== 0}}">
-  <view wx:for="{{equipPlace}}" wx:for-index="equipForIndex">
+  <view wx:for="{{equipPlace}}" wx:for-index="equipForIndex" wx:key="key">
     <view class='viewShadow'>
       <view class='viewTitle'>
         <text class='viewTitleWord'>{{equipPlace[equipForIndex].name}}</text>
+        <view  class='equipTopRight'>
+          <image src='../../../image/down.png' style='width:50rpx;height:50rpx' bindtap ='equipEnhanceMinus' data-index="{{equipForIndex}}"></image>
+          <text style='position:relative;bottom:10rpx;' >强化+{{equipEnhance[equipForIndex]}}</text>
+          <image src='../../../image/up.png' style='width:50rpx;height:50rpx' bindtap ='equipEnhancePlus' data-index="{{equipForIndex}}"></image>
+          <image src='../../../image/upup.png' style='width:50rpx;height:50rpx' bindtap ='equipEnhanceMax' data-index="{{equipForIndex}}"></image>
+        </view>
       </view>
-      <picker class= "picker" mode="multiSelector" 
-      bindchange = "bindMultiPickerChange"  bindcolumnchange = "bindMultiPickerColumnChange"
+      <picker class= "picker" mode="multiSelector"
+      bindchange = "equipMultiChange"  bindcolumnchange = "equipMultiColumnChanger"
        range="{{equipMutliArray[equipForIndex]}}"  data-idx = "{{equipForIndex}}">
-          <view class='equipBox'>
-            <text class='equipTopLeft'>{{equipMutliArray[equipForIndex][0][equipMutilIndexArray[equipForIndex][0]]}}</text>
-            <text class='equipTopRight'>{{equipMutliArray[equipForIndex][1][equipMutilIndexArray[equipForIndex][1]]}}</text>
-            <text class='equipBottomLeft'>{{equipList[equipForIndex][equipMutilIndexArray[equipForIndex][0]].description}}</text>
-            <text class='equipBottomRight'>{{equipList[equipForIndex][equipMutilIndexArray[equipForIndex][0]].from}}</text>
-          </view>          
+        <view class='equipBox'>
+          <text class='equipTopLeft'>{{equipMutliArray[equipForIndex][0][equipMutilIndexArray[equipForIndex][0]]}}</text>
+          <text class='equipTopRight'>{{equipMutliArray[equipForIndex][1][equipMutilIndexArray[equipForIndex][1]]}}</text>
+          <text class='equipBottomLeft'>{{equipList[equipForIndex][equipMutilIndexArray[equipForIndex][0]].description}}</text>
+          <text class='equipBottomRight'>{{equipList[equipForIndex][equipMutilIndexArray[equipForIndex][0]].from}}</text>
+        </view>
       </picker>
     </view>
-  </view>  
+  </view>
 </view>
+
 <view hidden="{{currentTab !== 1}}">
   <view class='viewShadow'>
     <view class='picker'>
-    <text class='viewTitle'>附魔</text>
+      <text class='viewTitle'>附魔</text>
+    </view>
+    <view class="li"  wx:for="{{enchantPlace}}" wx:for-index="enchantForIndex" wx:key="key">
+      <view class="picker">
+        <picker class= "picker" mode="multiSelector"  bindchange = "enchantMultiChange"  bindcolumnchange = "enchantMultiColumnChanger"
+               range="{{enchantArray[enchantForIndex]}}"  data-idx = "{{enchantForIndex}}">
+          <text >{{enchantPlace[enchantForIndex].name}}  </text>
+          <text  class='setcontext' >{{enchantArray[enchantForIndex][0][enchantIndexArray[enchantForIndex][0]]}}{{enchantArray[enchantForIndex][1][enchantIndexArray[enchantForIndex][1]]}}</text>          
+        </picker>        
+      </view>
+    </view>
   </view>
-  <view class="li"  wx:for="{{enchantPlace}}" wx:for-index="enchantForIndex" > 
-    <view hidden= "{{enchantPlace[enchantForIndex].show}}" class="picker"> 
-      <picker class= "picker" mode="selector" bindchange = "enchantPickerChange"  value="{{enchantIndexArray[enchantForIndex]}}" range="{{enchantArray[enchantForIndex]}}" range-key="name"  data-idx = "{{enchantForIndex}}"> 
-        <text >{{enchantPlace[enchantForIndex].value}}  </text> 
-        <text  class='setcontext' > {{enchantArray[enchantForIndex][enchantIndexArray[enchantForIndex]].name}}</text>
-      </picker>
-    </view>      
-  </view>  
-  </view>  
 
   <view class='viewShadow'>
-   <view class='picker'>
-    <text  class='viewTitle' >宝石</text>
+    <view class='picker'>
+      <text  class='viewTitle'>宝石</text>
+    </view>
+    <view class="li"  wx:for="{{stonePlace}}" wx:for-index="stoneForIndex" wx:key="key">
+      <view class="picker">
+        <picker class= "picker" mode="multiSelector"  bindchange = "stoneMultiChange"  bindcolumnchange = "stoneMultiColumnChanger"
+               range="{{stoneArray[stoneForIndex]}}"  data-idx = "{{stoneForIndex}}">
+          <text >{{stonePlace[stoneForIndex].name}}  </text>
+          <text  class='setcontext' >{{stoneArray[stoneForIndex][0][stoneIndexArray[stoneForIndex][0]]}}{{stoneArray[stoneForIndex][1][stoneIndexArray[stoneForIndex][1]]}}</text>          
+        </picker>        
+      </view>
+    </view>
   </view>
-  <view class="li"  wx:for="{{stonePlace}}" wx:for-index="stoneForIndex" > 
-    <view hidden= "{{stonePlace[stoneForIndex].show}}" class="picker"> 
-      <picker class= "picker" mode="selector" bindchange = "stonePickerChange"  value="{{stoneIndexArray[stoneForIndex]}}" range="{{stoneArray[stoneForIndex]}}" range-key="name"  data-idx = "{{stoneForIndex}}"> 
-      <text>{{stonePlace[stoneForIndex].value}}  </text> 
-        <text  class='setcontext' > {{stoneArray[stoneForIndex][stoneIndexArray[stoneForIndex]].name}}</text>
-      </picker>
-    </view>      
-  </view>  
-  </view>
- 
+
 </view>
 <!--星蕴-->
 <view hidden="{{currentTab !== 2}}">
   <view class='viewShadow'>
     <view class='viewTitle'>星蕴</view>
-    <view class="li"  wx:for="{{starArray}}" wx:for-index="starForIndex">
+    <view class="li"  wx:for="{{starArray}}" wx:for-index="starForIndex" wx:key="key">
       <text>{{starArray[starForIndex].name}}  </text>
       <input style='text-align:right' type="number" placeholder="请输入数字"  bindblur="starInputChange" data-idx = "{{starForIndex}}">
       </input>
@@ -74,25 +83,16 @@
     </view>
     <slider class='sliderClass' min='0' max='5' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='hubenSlider' bindchange='hubenSlider'>
     </slider>
-  </view>  
+  </view>
 
   <view class='viewShadow'>
     <view class='viewTitle'>
       <text class='viewTitleWord'>亢行</text>
       <text class='viewTitleSemiWord'>{{kanglong}}%会心</text>
     </view>
-      <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='kanglongSlider' bindchange='kanglongSlider'>
-      </slider>
-   </view>
-
-   <view class='viewShadow'>
-    <view class='viewTitle'>
-      <text class='viewTitleWord'>兼和</text>
-      <text class='viewTitleSemiWord'>{{jianhe}}%主属性</text>
-    </view>
-      <slider class='sliderClass' min='0' max='4' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='jianheSlider' bindchange='jianheSlider'>
-      </slider>
-   </view>
+    <slider class='sliderClass' min='0' max='3' step='1' show-value='true' activeColor='rgb(228,194,131)' block-color='rgb(228,194,131)' block-size='15' bindchanging='kanglongSlider' bindchange='kanglongSlider'>
+    </slider>
+  </view>
 </view>
 
 
@@ -103,67 +103,64 @@
     <view class='viewTitle'>挚友</view>
     <view>
       <checkbox-group bindchange="mutiCheckBox">
-        <view class='checkBox' wx:for="{{zhiyouArray}}">
+        <view class='checkBox' wx:for="{{zhiyouArray}}" wx:key="key">
           <checkbox value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
         </view>
       </checkbox-group>
-    </view>    
+    </view>
   </view>
 
   <view class='viewShadow'>
     <view class='viewTitle'>血露薇</view>
     <view>
       <radio-group bindchange="singleCheckBox">
-        <view class='checkBox' wx:for="{{xlwArray}}"  wx:key="xlwArray">
+        <view class='checkBox' wx:for="{{xlwArray}}" wx:key="xlwArray">
           <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
         </view>
       </radio-group>
-    </view>    
+    </view>
   </view>
 
   <view class='viewShadow'>
-      <view class='picker'>
-        <text class='viewTitle'>食品</text>
-      </view>
-      <view class="li" wx:for="{{foodPlace}}" wx:for-index="foodForIndex" > 
-        <view  class="picker"> 
-          <picker class= "picker" mode="selector" bindchange = "foodPickerChange"  value="{{foodIndexArray[foodForIndex]}}" range="{{foodArray[foodForIndex]}}" range-key="name"  data-idx = "{{foodForIndex}}"> 
-            <text >{{foodPlace[foodForIndex].value}}  </text> 
-            <text  class='setcontext' > {{foodArray[foodForIndex][foodIndexArray[foodForIndex]].name}}</text>
-          </picker>
-        </view>   
-        </view>   
+    <view class='picker'>
+      <text class='viewTitle'>食品</text>
     </view>
-
+    <view  class="picker">
+      <picker class= "picker" mode="selector" bindchange="foodPickerChange" value="{{foodIndexArray}}" range="{{foodArray}}" range-key="name"  data-idx = "{{foodForIndex}}">
+        <text>{{foodPlace[foodForIndex].value}}123</text>
+        <text  class='setcontext'>{{123}}</text>
+      </picker>
+    </view>    
+  </view>
 </view>
 
-  <!--面板-->
+<!--面板-->
 <view hidden="{{currentTab !== 4}}">
   <view class='viewShadow'>
-     <view class='picker'>
-       <text  class='viewTitle' >面板</text>
-     </view>
-     <view class="li" wx:for="{{propertyList}}" wx:for-index="propForIndex">      
-       <text >{{propertyList[propForIndex].name}}</text>
-       <text class='textS'>{{propertyList[propForIndex].value}}</text>
-       <text class='textS'>{{propertyList[propForIndex].percent}}</text>   
-     </view>
-     <view class="li">
-       <view>最终攻击</view>
-       <view style='text-align:right'>{{zuizhong}}</view>
-     </view>
-   </view>
+    <view class='picker'>
+      <text  class='viewTitle' >面板</text>
+    </view>
+    <view class="li" wx:for="{{propertyList}}" wx:for-index="propForIndex" wx:key="key">
+      <text >{{propertyList[propForIndex].name}}</text>
+      <text class='textS'>{{propertyList[propForIndex].value}}</text>
+      <text class='textS'>{{propertyList[propForIndex].percent}}</text>
+    </view>
+    <view class="li">
+      <view>最终攻击</view>
+      <view style='text-align:right'>{{zuizhong}}</view>
+    </view>
+  </view>
 
-<button class='share' type='primary' bindtap='drawCanvas'>配装总览</button>
-<view class="modalDlg" hidden="{{showCanvas}}">
+  <button class='share' type='primary' bindtap='drawCanvas'>配装总览</button>
+  <view class="modalDlg" hidden="{{showCanvas}}">
     <view class='modal-btn-wrapper-top'>
     </view>
-    <image src='{{shareImgUrl}}' bindtap='previewImage' mode='widthFix' style='width:100%'></image> 
+    <image src='{{shareImgUrl}}' bindtap='previewImage' mode='widthFix' style='width:100%'></image>
     <view class='modal-btn-wrapper-bottom'>
       <view class='cancel-btn' style='color:rgba(7,17,27,0.6)' bindtap='closeCanvas'>取消</view>
       <view class='confirm-btn' style='color:#1AAD19' bindtap='save'>保存到相册</view>
     </view>
-</view>
-<view class="mask" catchtouchmove="preventTouchMove" hidden="{{showCanvas}}"></view>
-<canvas  canvas-id="shareImg" style='width:863px;height:485px;position:fixed;left:2000px;top:0;'></canvas>
+  </view>
+  <view class="mask" catchtouchmove="preventTouchMove" hidden="{{showCanvas}}"></view>
+  <canvas  canvas-id="shareImg" style='width:863px;height:485px;position:fixed;left:2000px;top:0;'></canvas>
 </view>
